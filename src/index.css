@@ -1,13 +1,77 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    -webkit-tap-highlight-color: transparent;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.btn {
+    position: relative;
+    background-color: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: 0.5s;
+    
+}
+
+.btn span {
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s;
+}
+
+.btn:hover span {
+    color: #181c45;
+    transition: all 0.5s;
+}
+
+.monitor {
+    width: 515px;
+    height: 300px;
+    border: solid 1em #333;
+    border-radius: .5em;
+}
+
+.stand::before {
+    content:"";
+    position: absolute;
+    background: #222;
+    width: 150px;
+    height: 50px;   
+    bottom: -50px;
+    left: 185px;
+}
+
+.stand::after {
+    content: "";
+    position: absolute;
+    background: #333;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    width: 300px;
+    height: 15px;
+    bottom: -65px;
+    left: 110px;
 }
