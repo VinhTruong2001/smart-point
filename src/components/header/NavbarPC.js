@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // import { Avatar } from '@mui/material';
@@ -13,7 +12,7 @@ function NavbarPC() {
             </div>
 
             {/* Not sign in */}
-            <div class="text-white cursor-pointer p-2 border-white border btn">
+            <div class="text-white border-white btn btn-animation before:bg-white">
                 <span>Đăng nhập</span>
             </div>
 
