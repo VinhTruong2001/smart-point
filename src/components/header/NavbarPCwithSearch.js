@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // import { Avatar } from '@mui/material';
 
-function NavbarPC() {
+function NavbarPCwithSearch() {
     return (
-        <div className="hidden h-14 space-x-3 lg:flex items-center text-white">
+        <div className="hidden h-14 space-x-3 lg:flex items-center text-white ">
             <div class="text-white cursor-pointer">Mẹo vặt & Hướng dẫn</div>
             <div class="text-yellow-400 cursor-pointer flex items-center space-x-1">
                 <EmojiEventsIcon />
@@ -26,4 +26,4 @@ function NavbarPC() {
     )
 }
 
-export default NavbarPC
+export default NavbarPCwithSearch

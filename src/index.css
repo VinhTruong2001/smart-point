@@ -33,7 +33,6 @@
     transform: scaleX(1);
     transform-origin: left;
     transition: 0.5s;
-    
 }
 
 .btn span {

@@ -1,15 +1,15 @@
 import './App.css';
 import Header from './components/header/Header'
-import SearchOption from './components/searchAndFilter/SearchOption';
+import SearchAndFilter from './components/searchAndFilter/SearchAndFilter';
 
 function App() {
   return (
-    <div className="App relative">
+    <div className="App relative h-[3000px]">
       {/* Header */}
       <Header />
 
       {/* Search */}
-      <SearchOption />
+      <SearchAndFilter />
 
       {/* Body */}
 
