@@ -40,14 +40,14 @@ function Template({ url }) {
     var slides = [];
     for (var i = 0; i < 56; i++) {
         slides.push(
-            <div key={i} className="w-full h-full">
-                <img className="h-full" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
+            <div key={i} className="rounded-md overflow-hidden">
+                <img className="w-full h-[246px]" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
             </div>
-        );
+        );  
     }
 
     return (
-        <Slider className="w-full h-[245px] flex items-center justify-center" {...settings}>
+        <Slider className="w-full flex items-center justify-center group" {...settings}>
             {slides}
         </Slider>
     )
