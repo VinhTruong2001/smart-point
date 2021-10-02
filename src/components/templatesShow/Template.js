@@ -1,31 +1,103 @@
-import React from 'react'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import React, { useState } from 'react';
+import { Document, Page,pdfjs } from 'react-pdf';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import "../../styles/loadingAnimation.css"
 
-function Template({ type }) {
-    return (
-        <div className="relative w-full h-[245px] bg-gray-200 rounded-lg cursor-pointer group">
-            { type && 
-                <div className="absolute top-2 left-2 rounded-xl py-1 px-2 text-sm text-yellow-400 cursor-pointer flex items-center space-x-1 bg-gray-700">
-                    <EmojiEventsIcon fontSize="small"/>
-                    <span>Nâng cấp</span>
-                </div>
+function Template({ url }) {
+    const settings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+    }; 
+
+    function SampleNextArrow(props) {    
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={`${className} !right-2 z-[2] !text-3xl`}
+                style={{ ...style, display: "block"}}
+                onClick={() => { nextPage(); onClick(); }}
+            />
+        );
+    }
+
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={`${className} !left-2 z-[2] !text-3xl`}
+                style={{ ...style, display: "block"}}
+                onClick={() => { prevPage(); onClick(); }}
+            />
+        );
+    }
+
+    const [numPages, setNumPages] = useState(null);
+    const [pageNumber, setPageNumber] = useState(1)
+    const [numPagesLoaded, setNumPagesLoaded] = useState(4);
+    const [pages, setPages] = useState(null);
+
+    var rows = pages || [];
+    if (rows.length === 0) {
+        for (var i = 1; i < 5; i++) {
+            rows.push(<Page key={i} pageNumber={i} height={245} width={440}/>);
+        }
+    }
+    // console.log(rows);
+    
+    function nextPage() {
+        setPageNumber(pageNumber+1);
+        if (pageNumber === numPagesLoaded - 1) {
+            let i = numPagesLoaded + 1;
+            for (; i <= numPages && i < numPagesLoaded + 10 ; i++) {
+                rows.push(<Page key={i} pageNumber={i} height={245} width={440}/>);
             }
+            setPages(rows);
+            setNumPagesLoaded(i-1)
+        }
+    } 
 
-            <div className="absolute top-0 bottom-0 right-0 w-[10%] p-2 opacity-0 group-hover:opacity-100 transition-all duration-200">
-                <div class="absolute top-0 right-0 w-full h-full template-overlay bg-gradient-to-r from-black/0 to-black/30"></div>
-                <div class="absolute right-0 left-0 z-10 flex flex-col items-center space-y-2 ">
-                    <button className="bg-white p-0.5 rounded-md">
-                        <FavoriteBorderIcon fontSize="small"/>
-                    </button>
+    function prevPage() {
+        setPageNumber(pageNumber - 1)
+    }
 
-                    <button className="bg-primary text-white p-0.5 rounded-md">
-                        <FileDownloadIcon fontSize="small"/>
-                    </button>
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    
+    function onDocumentLoadSuccess({ numPages }) {
+        setNumPages(numPages);
+    }
+
+    const onLoading = (
+        <div className="frame">
+            <div className="center">
+                <div className="circle first">
+                    <div className="circle second">
+                        <div className="circle third"></div>
+                    </div>
                 </div>
             </div>
         </div>
+    )
+
+    return (
+        <>
+            <Document
+                file={url}
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={onLoading}
+                renderMode="svg"
+            >
+                <Slider className="h-[245px] w-full flex items-center justify-center" {...settings}>
+                    {pages || rows}
+                </Slider>
+            </Document>
+        </>
     )
 }
 
