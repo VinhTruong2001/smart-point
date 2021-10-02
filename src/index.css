@@ -85,3 +85,7 @@
     bottom: -65px;
     left: 110px;
 }
+
+.slick-list {
+    width: 100% !important;
+}
