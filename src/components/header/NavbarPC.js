@@ -5,14 +5,14 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 function NavbarPC() {
     return (
         <div className="hidden h-14 space-x-3 lg:flex items-center text-white">
-            <div class="text-white cursor-pointer">Mẹo vặt & Hướng dẫn</div>
-            <div class="text-yellow-400 cursor-pointer flex items-center space-x-1">
+            <div className="text-white cursor-pointer">Mẹo vặt & Hướng dẫn</div>
+            <div className="text-yellow-400 cursor-pointer flex items-center space-x-1">
                 <EmojiEventsIcon />
                 <span>Nâng cấp</span>
             </div>
 
             {/* Not sign in */}
-            <div class="text-white border-white btn btn-animation before:bg-white">
+            <div className="text-white border-white btn btn-animation before:bg-white">
                 <span>Đăng nhập</span>
             </div>
 

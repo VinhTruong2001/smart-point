@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Document, Page,pdfjs } from 'react-pdf';
+import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import "../../styles/loadingAnimation.css"
+
 
 function Template({ url }) {
     const settings = {
@@ -22,7 +21,7 @@ function Template({ url }) {
             <div
                 className={`${className} !right-2 z-[2] !text-3xl`}
                 style={{ ...style, display: "block"}}
-                onClick={() => { nextPage(); onClick(); }}
+                onClick={onClick}
             />
         );
     }
@@ -33,71 +32,24 @@ function Template({ url }) {
             <div
                 className={`${className} !left-2 z-[2] !text-3xl`}
                 style={{ ...style, display: "block"}}
-                onClick={() => { prevPage(); onClick(); }}
+                onClick={onClick}
             />
         );
     }
 
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1)
-    const [numPagesLoaded, setNumPagesLoaded] = useState(4);
-    const [pages, setPages] = useState(null);
-
-    var rows = pages || [];
-    if (rows.length === 0) {
-        for (var i = 1; i < 5; i++) {
-            rows.push(<Page key={i} pageNumber={i} height={245} width={440}/>);
-        }
-    }
-    // console.log(rows);
-    
-    function nextPage() {
-        setPageNumber(pageNumber+1);
-        if (pageNumber === numPagesLoaded - 1) {
-            let i = numPagesLoaded + 1;
-            for (; i <= numPages && i < numPagesLoaded + 10 ; i++) {
-                rows.push(<Page key={i} pageNumber={i} height={245} width={440}/>);
-            }
-            setPages(rows);
-            setNumPagesLoaded(i-1)
-        }
-    } 
-
-    function prevPage() {
-        setPageNumber(pageNumber - 1)
-    }
-
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-    
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    }
-
-    const onLoading = (
-        <div className="frame">
-            <div className="center">
-                <div className="circle first">
-                    <div className="circle second">
-                        <div className="circle third"></div>
-                    </div>
-                </div>
+    var slides = [];
+    for (var i = 0; i < 56; i++) {
+        slides.push(
+            <div key={i} className="w-full h-full">
+                <img className="h-full" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
             </div>
-        </div>
-    )
+        );
+    }
 
     return (
-        <>
-            <Document
-                file={url}
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={onLoading}
-                renderMode="svg"
-            >
-                <Slider className="h-[245px] w-full flex items-center justify-center" {...settings}>
-                    {pages || rows}
-                </Slider>
-            </Document>
-        </>
+        <Slider className="w-full h-[245px] flex items-center justify-center" {...settings}>
+            {slides}
+        </Slider>
     )
 }
 

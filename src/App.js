@@ -13,7 +13,7 @@ function App() {
       <SearchAndFilter />
 
       {/* Body */}
-      <main className="px-4 md:px-10 lg:px-30 xl:px-60">
+      <main className="px-4 md:px-10 lg:px-20 2xl:px-60">
         <TemplatesShow />
       </main>
 

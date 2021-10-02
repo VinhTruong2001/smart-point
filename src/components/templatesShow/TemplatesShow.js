@@ -8,14 +8,14 @@ function TemplatesShow() {
                 title="Các Templates mới"
                 path="/latest"
             />
-            {/* <TemplateSection 
+            <TemplateSection 
                 title="Các Templates tải nhiều nhất"
                 path="/popular"
             />
             <TemplateSection 
                 title="Sơ đồ"
                 path="/infographic"
-            /> */}
+            />
         </div>
     )
 }

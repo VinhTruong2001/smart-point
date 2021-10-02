@@ -24,8 +24,8 @@ function Header() {
 
             {/* Navbar */}
             <div className="flex items-center lg:space-x-6 space-x-2">
-                <div class="overflow-hidden">
-                    <div class={`transform translate-x-full origin-left transition duration-500 ${isChangeHeader && 'translate-x-0'}`} >
+                <div className="overflow-hidden">
+                    <div className={`transform translate-x-full origin-left transition duration-500 ${isChangeHeader && 'translate-x-0'}`} >
                         <SearchBar />
                     </div>
                 </div>

@@ -10,7 +10,7 @@ function FilterSelects({ title, options }) {
             <span className="group-hover:text-primary">{ title }</span>
             <ArrowDropDownIcon />
             
-            <div class="absolute top-[40px] left-0 bg-white border border-gray-200 shadow-lg rounded-md px-2 scale-y-0 origin-top group-focus:scale-y-100 duration-200">
+            <div className="absolute top-[40px] left-0 bg-white border border-gray-200 shadow-lg rounded-md px-2 scale-y-0 origin-top group-focus:scale-y-100 duration-200">
                 { options.map((option, index) => ( 
                     <FilterSelect 
                         key={ index }
