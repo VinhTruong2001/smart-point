@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 function Template({ url }) {
@@ -16,24 +18,26 @@ function Template({ url }) {
     }; 
 
     function SampleNextArrow(props) {    
-        const { className, style, onClick } = props;
+        const { onClick } = props;
         return (
-            <div
-                className={`${className} !right-2 z-[2] !text-3xl`}
-                style={{ ...style, display: "block"}}
-                onClick={onClick}
-            />
+            <div 
+                onClick={onClick} 
+                className="absolute top-1/2 right-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border-0.5 border-gray-400"
+            >
+                <ArrowForwardIosIcon fontSize="small"/>
+            </div>
         );
     }
 
-    function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
+    function SamplePrevArrow(props) {    
+        const { onClick } = props;
         return (
             <div
-                className={`${className} !left-2 z-[2] !text-3xl`}
-                style={{ ...style, display: "block"}}
                 onClick={onClick}
-            />
+                className="absolute top-1/2 left-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border-0.5 border-gray-400"
+            >
+                   <ArrowBackIosNewIcon fontSize="small"/>
+            </div>
         );
     }
 

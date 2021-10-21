@@ -6,7 +6,7 @@ function TemplateSection({ title, path }) {
         <div>
             {/* Top */}
             <div className="flex justify-between">
-                <h2 className="font-bold text-3xl text-primary">{ title }</h2>
+                <h2 className="font-bold text-2xl lg:text-3xl text-primary">{ title }</h2>
                 <a href={`${path}`} className="btn !bg-primary !border-transparent">
                     <span className="text-white font-semibold">Xem thêm</span>
                 </a>
