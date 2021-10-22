@@ -1,4 +1,5 @@
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { Link } from 'react-router-dom';
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // import { Avatar } from '@mui/material';
 
@@ -12,9 +13,11 @@ function NavbarPC() {
             </div>
 
             {/* Not sign in */}
-            <div className="text-white border-white btn btn-animation before:bg-white">
-                <span>Đăng nhập</span>
-            </div>
+            <Link to="./login">
+                <div className="text-white border-white btn btn-animation before:bg-white">
+                    <span>Đăng nhập</span>
+                </div>
+            </Link>
 
             {/* Sign in */}
             {/* <div className="flex items-center cursor-pointer">

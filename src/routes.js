@@ -1,6 +1,8 @@
 import React from 'react';
+import LoginPage from './pages/LoginPage';
 import Homepage from './pages/Homepage';
-import Template from './pages/Template';
+import TemplatePage from './pages/TemplatePage';
+import RegisterPage from './pages/RegisterPage';
 
 const routes = [
     {
@@ -11,8 +13,18 @@ const routes = [
     {
         path: '/template',
         exact: true,
-        main: () => <Template />
-    }
+        main: () => <TemplatePage />
+    },
+    {
+        path: '/login',
+        exact: true,
+        main: () => <LoginPage />
+    },
+    {
+        path: '/register',
+        exact: true,
+        main: () => <RegisterPage />
+    },
 ];
 
 export default routes;

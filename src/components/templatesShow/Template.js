@@ -22,7 +22,7 @@ function Template({ url }) {
         return (
             <div 
                 onClick={onClick} 
-                className="absolute top-1/2 right-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border-0.5 border-gray-400"
+                className="absolute top-1/2 right-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border border-gray-400"
             >
                 <ArrowForwardIosIcon fontSize="small"/>
             </div>
@@ -34,7 +34,7 @@ function Template({ url }) {
         return (
             <div
                 onClick={onClick}
-                className="absolute top-1/2 left-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border-0.5 border-gray-400"
+                className="absolute top-1/2 left-2 p-0.5 z-[2] flex items-center text-gray-500 bg-white rounded-full cursor-pointer border border-gray-400"
             >
                    <ArrowBackIosNewIcon fontSize="small"/>
             </div>

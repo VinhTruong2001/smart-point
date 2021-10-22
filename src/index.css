@@ -6,6 +6,13 @@
     .body-container {
         @apply px-4 md:px-10 lg:px-20 2xl:px-60;
     }
+    .form-group.invalid > .form-control {
+        @apply border-red-500
+    }
+
+    .form-message {
+        @apply text-red-500;
+    }
 }
 
 * {
