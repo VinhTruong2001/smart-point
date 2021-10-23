@@ -42,7 +42,7 @@ function TemplateProduct() {
         return (
             <div 
                 onClick={onClick} 
-                className="absolute top-1/2 right-2 z-[2] text-gray-500 bg-white rounded-full p-0.5 cursor-pointer"
+                className="hidden group-hover:block absolute top-1/2 right-4 z-[2] text-gray-500 bg-white rounded-full p-0.5 cursor-pointer"
             >
                 <ArrowForwardIosIcon />
             </div>
@@ -54,7 +54,7 @@ function TemplateProduct() {
         return (
             <div
                 onClick={onClick}
-                className="absolute top-1/2 left-4 z-[2] text-gray-500 bg-white rounded-full p-0.5 cursor-pointer"
+                className="hidden group-hover:block absolute top-1/2 left-4 z-[2] text-gray-500 bg-white rounded-full p-0.5 cursor-pointer"
             >
                    <ArrowBackIosNewIcon />
             </div>

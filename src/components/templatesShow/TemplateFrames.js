@@ -26,13 +26,13 @@ function TemplateFrames({ type, url }) {
             <div className="absolute top-0 bottom-0 right-0 w-[10%] opacity-0 group-hover:opacity-100 transition-all duration-200">
                 <div className="absolute top-0 bottom-0 right-0 w-full bg-gradient-to-r from-black/0 to-black/50"></div>
                 <div className="absolute top-2 right-0 left-0 z-3 flex flex-col items-center space-y-2 ">
-                    <button className="bg-white p-0.5 rounded-md">
+                    <div className="relative bg-white p-0.5 rounded-md group">
                         <FavoriteBorderIcon fontSize="small"/>
-                    </button>
+                    </div>
 
-                    <button className="bg-primary text-white p-0.5 rounded-md">
+                    <div className="realtive bg-primary text-white p-0.5 rounded-md group">
                         <FileDownloadIcon fontSize="small"/>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>

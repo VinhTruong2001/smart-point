@@ -2,6 +2,7 @@ import './App.css';
 import Header from './components/header/Header'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import routes from './routes';
+import ScrollToTop from './components/scrollToTop/ScrollToTop';
 
 function App() {
   const showContentMenus = (routes) => {
@@ -26,7 +27,8 @@ function App() {
         <Header />
 
         <main className="relative top-16">
-          { showContentMenus(routes) }
+            <ScrollToTop />
+            { showContentMenus(routes) }
         </main>
 
         {/* Footer */}

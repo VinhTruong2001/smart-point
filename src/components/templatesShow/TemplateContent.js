@@ -95,13 +95,10 @@ function TemplateContent() {
                             <TemplateFrames type={false} url={process.env.PUBLIC_URL + '/test/Minimalist & Formal Consulting Toolkit by Slidesgo'}/>
                             <span className="font-semibold group-hover:text-primary">Minimalist &amp; Formal Consulting Toolkit</span>
                         </div>
-                        <div className="group">
-                            <TemplateFrames type={false} url={process.env.PUBLIC_URL + '/test/Movie Maker Animation Studios Style Workshop by Slidesgo'}/>
-                            <span className="font-semibold group-hover:text-primary">Movie Maker Animation Studios Style Workshop</span>
-                        </div>
-                        <div className="group">
-                            <TemplateFrames type={true} url={process.env.PUBLIC_URL + '/test/Product Requirement Theme for Business by Slidesgo'}/>
-                            <span className="font-semibold group-hover:text-primary">Product Requirement Theme for Business</span>
+                    </div>
+                    <div className="w-full flex mt-3">
+                        <div className="m-auto cursor-pointer py-2 px-3 bg-primary text-white rounded-md">
+                            Xem thêm
                         </div>
                     </div>
                 </div>

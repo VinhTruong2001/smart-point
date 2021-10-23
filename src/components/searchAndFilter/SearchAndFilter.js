@@ -1,4 +1,5 @@
 import React from 'react'
+import FilterBar from './filter/FilterBar'
 // eslint-disable-next-line
 import SearchBar from './search/SearchBar'
 
@@ -28,6 +29,7 @@ function SearchAndFilter() {
                     </div>
                 </div>
             </div>
+            { window.innerWidth >= 740 && <FilterBar /> }
         </>
     )
 }
