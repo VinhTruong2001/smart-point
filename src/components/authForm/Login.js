@@ -3,9 +3,13 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link } from 'react-router-dom';
 import Validator from '../../utils/validator'
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/index';
 
-function Login() {
+function Login({ dispatch }) {
     const [isLoginWithEmail, setIsLoginWithEmail] = useState(false)
+
+    const homepageBtnRef = useRef(null);
 
     // Validtor
     const emailRef = useRef("");
@@ -21,9 +25,9 @@ function Login() {
                 Validator.isEmail('#email', 'Email không hợp lệ hoặc không đúng'),
                 Validator.isRequire('#password', 'Vui lòng nhập mật khẩu'),
             ],
-            // onSubmit: function() {
-            //     login();
-            // }
+            onSubmit: function() {
+                login();
+            }
         })
     })
 
@@ -33,6 +37,11 @@ function Login() {
 
     const backToLoginOptions = () => {
         setIsLoginWithEmail(false);
+    }
+
+    const login = () => {
+        dispatch(setUser(emailRef.current.value, passwordRef.current.value))
+        homepageBtnRef.current.click();
     }
 
     return (
@@ -76,7 +85,7 @@ function Login() {
                         </div>
                         <span className="form-message"></span>
                     </div>
-                    <button className="p-2 w-full rounded-full text-center text-white font-medium bg-[#fe3847]">
+                    <button type="submit" className="p-2 w-full rounded-full text-center text-white font-medium bg-[#fe3847]">
                         Đăng nhập
                     </button>
                 </form>)
@@ -102,8 +111,9 @@ function Login() {
                 <span>Bạn chưa có tài khoản? </span>
                 <Link to="./register" className="text-primary font-medium">Đăng ký</Link>  
             </div>
+            <Link ref={ homepageBtnRef } to="./" className="hidden"></Link>
         </div>
     )
 }
 
-export default Login
+export default connect(null, null)(Login)
