@@ -52,7 +52,6 @@ function Upgrade({ user }) {
                 addressRef.current.parentElement.classList.add('bg-gray-200')
                 cityRef.current.parentElement.classList.add('bg-gray-200')
                 setCheckout(true);
-                console.log(document.querySelector("input[name='price']:checked").value);
             }
         })
     })
@@ -182,8 +181,6 @@ function Upgrade({ user }) {
                     </label>
                 </div>
             </div>
-
-            {/* <Link ref={ loginPage } to="./login"></Link> */}
         </div>
     )
 }

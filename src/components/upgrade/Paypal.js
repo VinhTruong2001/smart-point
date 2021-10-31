@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react'
 function Paypal({ value }) {
     const paypal = useRef();
 
-    useEffect((value) => {
+    useEffect(() => {
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
                 return actions.order.create({
@@ -27,7 +27,7 @@ function Paypal({ value }) {
                 console.log(err)
             }
         }).render(paypal.current)
-    }, [])
+    }, [value])
 
     return (
         <div className="flex">
