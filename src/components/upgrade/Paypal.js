@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 function Paypal({ value }) {
+    const history = useHistory();
     const paypal = useRef();
 
     useEffect(() => {
@@ -22,16 +24,17 @@ function Paypal({ value }) {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log(order);
+                history.push('/')
             },
             onError: (err) => {
                 console.log(err)
             }
         }).render(paypal.current)
-    }, [value])
+    }, [value, history])
 
     return (
-        <div className="flex">
-            <div className="m-auto w-full pl-20" ref={paypal}></div>
+        <div className="flex col-span-2 mt-5 lg:mt-0">
+            <div className="m-auto w-full lg:pl-14 z-[2]" ref={paypal}></div>
         </div>
     )
 }

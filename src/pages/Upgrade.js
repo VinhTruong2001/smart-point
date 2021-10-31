@@ -68,70 +68,107 @@ function Upgrade({ user }) {
                 </div>
             </div>
 
-            <div className="body-container py-10 grid grid-cols-3">
+            <div className="body-container py-10">
                 {/* Checkout form */}
-                <form id="checkOutForm" className="col-span-2 space-y-4">
-                    <h2 className="text-primary font-bold uppercase text-2xl mb-4">Thông tin cá nhân</h2>
+                <form id="checkOutForm" className="grid grid-cols-1 lg:grid-cols-3">
+                    <div className="col-span-2 space-y-4">
+                        <h2 className="text-primary font-bold uppercase text-2xl mb-4">Thông tin cá nhân</h2>
 
-                    <div className="form-group space-y-1 pt-2 flex items-center">
-                        <label className="font-medium w-[20%] text-xl">Họ và tên*</label>
-                        <div className="flex-1">
-                            <div className="border border-gray-300 px-2 rounded-md form-control">
-                                <input 
-                                    ref={ fullnameRef }
-                                    type="text" 
-                                    name="fullname"
-                                    id="fullname" 
-                                    className="p-2 outline-none w-full bg-transparent"
-                                /> 
+                        <div className="form-group space-y-1 pt-2 flex items-center space-x-3 lg:space-x-0">
+                            <label className="font-medium w-[20%] lg:text-xl">Họ và tên*</label>
+                            <div className="flex-1">
+                                <div className="border border-gray-300 px-2 rounded-md form-control">
+                                    <input 
+                                        ref={ fullnameRef }
+                                        type="text" 
+                                        name="fullname"
+                                        id="fullname" 
+                                        className="p-2 outline-none w-full bg-transparent"
+                                    /> 
+                                </div>
+                                <span className="form-message"></span>
                             </div>
-                            <span className="form-message"></span>
+                        </div>
+                        <div className="form-group space-y-1 pt-2 flex items-center space-x-3 lg:space-x-0">
+                            <label className="font-medium w-[20%] lg:text-xl">Email*</label>
+                            <div className="flex-1">
+                                <div className="border border-gray-300 px-2 rounded-md form-control">
+                                    <input 
+                                        ref={ emailRef }
+                                        type="text" 
+                                        name="email"
+                                        id="email"
+                                        className="p-2 outline-none w-full bg-transparent"
+                                    /> 
+                                </div>
+                                <span className="form-message"></span>
+                            </div>
+                        </div>
+                        <div className="form-group space-y-1 pt-2 flex items-center space-x-3 lg:space-x-0">
+                            <label className="font-medium w-[20%] lg:text-xl">Địa chỉ*</label>
+                            <div className="flex-1">
+                                <div className="border border-gray-300 px-2 rounded-md form-control">
+                                    <input 
+                                        ref={ addressRef }
+                                        type="text" 
+                                        name="address"
+                                        id="address"
+                                        className="p-2 outline-none w-full bg-transparent"
+                                    /> 
+                                </div>
+                                <span className="form-message"></span>
+                            </div>
+                        </div>
+                        <div className="form-group space-y-1 pt-2 pb-5 flex items-center space-x-3 lg:space-x-0">
+                            <label className="font-medium w-[20%] lg:text-xl">Tỉnh/Thành*</label>
+                            <div className="flex-1">
+                                <div className="border border-gray-300 px-2 rounded-md form-control">
+                                    <input 
+                                        ref={ cityRef }
+                                        type="text" 
+                                        name="city"
+                                        id="city"
+                                        className="p-2 outline-none w-full bg-transparent"
+                                    /> 
+                                </div>
+                                <span className="form-message"></span>
+                            </div>
                         </div>
                     </div>
-                    <div className="form-group space-y-1 pt-2 flex items-center">
-                        <label className="font-medium w-[20%] text-xl">Email*</label>
-                        <div className="flex-1">
-                            <div className="border border-gray-300 px-2 rounded-md form-control">
-                                <input 
-                                    ref={ emailRef }
-                                    type="text" 
-                                    name="email"
-                                    id="email"
-                                    className="p-2 outline-none w-full bg-transparent"
-                                /> 
+                   
+                    {/* Price */}
+                    <div className="space-y-4 w-full">
+                        {/* Monthly */}
+                        <label className="block relative h-36 rounded-lg bg-gradient-primary lg:ml-32 p-3 cursor-pointer">
+                            <div className="text-yellow-200 space-x-2 uppercase font-bold flex items-center">
+                                <EmojiEventsIcon />
+                                <span className="">Gói 1 tháng</span>
                             </div>
-                            <span className="form-message"></span>
-                        </div>
-                    </div>
-                    <div className="form-group space-y-1 pt-2 flex items-center">
-                        <label className="font-medium w-[20%] text-xl">Địa chỉ*</label>
-                        <div className="flex-1">
-                            <div className="border border-gray-300 px-2 rounded-md form-control">
-                                <input 
-                                    ref={ addressRef }
-                                    type="text" 
-                                    name="address"
-                                    id="address"
-                                    className="p-2 outline-none w-full bg-transparent"
-                                /> 
+                            <div className="text-white">
+                                <span className="text-2xl font-bold">$3.99</span> 
+                                <span>/tháng</span>
                             </div>
-                            <span className="form-message"></span>
-                        </div>
-                    </div>
-                    <div className="form-group space-y-1 pt-2 pb-5 flex items-center">
-                        <label className="font-medium w-[20%] text-xl">Tỉnh/Thành*</label>
-                        <div className="flex-1">
-                            <div className="border border-gray-300 px-2 rounded-md form-control">
-                                <input 
-                                    ref={ cityRef }
-                                    type="text" 
-                                    name="city"
-                                    id="city"
-                                    className="p-2 outline-none w-full bg-transparent"
-                                /> 
+                            <div className="italic text-white mt-4">Số tiền phải thanh toán: $3.99</div>
+                            <div className="absolute top-3 right-3">
+                                <input ref={ price1Ref } type="radio" name="price" value={3.99} defaultChecked/>
                             </div>
-                            <span className="form-message"></span>
-                        </div>
+                        </label>
+
+                        {/* One year */}
+                        <label className="block relative h-36 rounded-lg bg-gradient-primary lg:ml-32 p-3 cursor-pointer">
+                            <div className="text-yellow-200 space-x-2 uppercase font-bold flex items-center">
+                                <EmojiEventsIcon className="" />
+                                <span className="">Gói 1 năm</span>
+                            </div>
+                            <div className="text-white">
+                                <span className="text-2xl font-bold">$2.33</span>
+                                <span>/tháng</span>
+                            </div>
+                            <div className="italic text-white mt-4">Số tiền phải thanh toán: $27.99</div>
+                            <div className="absolute top-3 right-3">
+                                <input ref={ price2Ref } type="radio" name="price" value={27.99}/>
+                            </div>
+                        </label>
                     </div>
 
                     { checkout ? (
@@ -139,47 +176,12 @@ function Upgrade({ user }) {
                         ) : (
                             <button 
                                 type="submit"
-                                className="w-full bg-primary text-white font-semibold rounded-md py-3"
+                                className="col-span-2 bg-primary text-white font-semibold rounded-md py-3 mt-5"
                             >
                                 Tiến hành thanh toán
                             </button>
-                        )}
+                    )}
                 </form>
-
-                {/* Price */}
-                <div className="space-y-4">
-                    {/* Monthly */}
-                    <label className="block relative h-36 rounded-lg bg-gradient-primary ml-32 p-3 cursor-pointer">
-                        <div className="text-yellow-200 space-x-2 uppercase font-bold flex items-center">
-                            <EmojiEventsIcon />
-                            <span className="">Gói 1 tháng</span>
-                        </div>
-                        <div className="text-white">
-                            <span className="text-2xl font-bold">$3.99</span> 
-                            <span>/tháng</span>
-                        </div>
-                        <div className="italic text-white mt-4">Số tiền phải thanh toán: $3.99</div>
-                        <div className="absolute top-3 right-3">
-                            <input ref={ price1Ref } type="radio" name="price" value={3.99} defaultChecked/>
-                        </div>
-                    </label>
-
-                    {/* One year */}
-                    <label className="block relative h-36 rounded-lg bg-gradient-primary ml-32 p-3 cursor-pointer">
-                        <div className="text-yellow-200 space-x-2 uppercase font-bold flex items-center">
-                            <EmojiEventsIcon className="" />
-                            <span className="">Gói 1 năm</span>
-                        </div>
-                        <div className="text-white">
-                            <span className="text-2xl font-bold">$2.33</span>
-                            <span>/tháng</span>
-                        </div>
-                        <div className="italic text-white mt-4">Số tiền phải thanh toán: $27.99</div>
-                        <div className="absolute top-3 right-3">
-                            <input ref={ price2Ref } type="radio" name="price" value={27.99}/>
-                        </div>
-                    </label>
-                </div>
             </div>
         </div>
     )
