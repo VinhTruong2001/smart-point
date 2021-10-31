@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 @layer components {
+    .bg-gradient-primary {
+        @apply bg-gradient-to-r from-[#fe3847] to-[#171c44]
+    }
     .body-container {
         @apply px-4 md:px-10 lg:px-20 2xl:px-60;
     }
-    .form-group.invalid > .form-control {
+    .form-group.invalid .form-control {
         @apply border-red-500
     }
 

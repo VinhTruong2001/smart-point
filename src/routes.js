@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import Homepage from './pages/Homepage';
 import TemplatePage from './pages/TemplatePage';
 import RegisterPage from './pages/RegisterPage';
+import Upgrade from './pages/Upgrade';
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/register',
         exact: true,
         main: () => <RegisterPage />
+    },
+    {
+        path: '/upgrade',
+        exact: true,
+        main: () => <Upgrade />
     },
 ];
 

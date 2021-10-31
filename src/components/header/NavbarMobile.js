@@ -38,10 +38,12 @@ function NavbarMobile({ user }) {
     
                 
                 { !user?.type && 
-                    <div className="text-yellow-400 cursor-pointer flex items-center space-x-1">
-                        <EmojiEventsIcon />
-                        <span>Nâng cấp</span>
-                    </div>
+                    <Link to='./upgrade'>
+                        <div className="text-yellow-400 cursor-pointer flex items-center space-x-1">
+                            <EmojiEventsIcon />
+                            <span>Nâng cấp</span>
+                        </div>
+                    </Link>
                 }  
 
                 <div className="cursor-pointer">Mẹo vặt &amp; Hướng dẫn</div> 

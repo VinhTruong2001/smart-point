@@ -6,7 +6,7 @@ import SearchBar from './search/SearchBar'
 function SearchAndFilter() {
     return (
         <>
-            <div className="h-[480px] lg:h-[620px] px-2 lg:px-12 bg-gradient-to-r from-[#fe3847] to-[#171c44] flex items-center">
+            <div className="h-[480px] lg:h-[620px] px-2 lg:px-12 bg-gradient-primary flex items-center">
                 {/* Intro and search bar */}
                 <div className="flex-1">
                     <div className="relative w-full flex flex-col items-center mb-6">

@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Validator from '../../utils/validator'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
 
 function Login({ dispatch }) {
+    const history = useHistory();
+    const location = useLocation();
     const [isLoginWithEmail, setIsLoginWithEmail] = useState(false)
-
-    const homepageBtnRef = useRef(null);
 
     // Validtor
     const emailRef = useRef("");
@@ -40,8 +40,8 @@ function Login({ dispatch }) {
     }
 
     const login = () => {
-        dispatch(setUser(emailRef.current.value, passwordRef.current.value))
-        homepageBtnRef.current.click();
+        dispatch(setUser(emailRef.current.value, passwordRef.current.value));
+        history.push(location.state?.prevPath || '/');
     }
 
     return (
@@ -111,7 +111,6 @@ function Login({ dispatch }) {
                 <span>Bạn chưa có tài khoản? </span>
                 <Link to="./register" className="text-primary font-medium">Đăng ký</Link>  
             </div>
-            <Link ref={ homepageBtnRef } to="./" className="hidden"></Link>
         </div>
     )
 }
