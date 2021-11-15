@@ -6,6 +6,7 @@ const testUsers = [
         profilePic: "https://pickaface.net/gallery/avatar/20110712_114806_4250_testing.png",
         email: "admin@gmail.com",
         password: "admin",
+        phoneNumber: "0123456789",
         interest: [],
         downloaded: 0,
         type: 1
@@ -15,6 +16,7 @@ const testUsers = [
         profilePic: "https://media.slidesgo.com/avatars/11035578/avatar.png",
         email: "ducvinh.truong2001@gmail.com",
         password: "1",
+        phoneNumber: "0853274954",
         interest: [],
         downloaded: 0,
         type: 0

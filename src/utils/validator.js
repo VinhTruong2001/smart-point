@@ -160,11 +160,30 @@ Validator.isEmail = function(selector, message) {
     }
 }
 
+Validator.isNumber = function(selector, message) {
+    return {
+        selector: selector,
+        test: function(value) {
+            var regex = /^\d+$/;
+            return regex.test(value) ? undefined : message || 'Trường này chỉ được nhập số'
+        }
+    }
+}
+
 Validator.minLength = function(selector, min, message) {
     return {
         selector: selector,
         test: function(value) {
             return value.length >= min ? undefined : message || `Vui lòng nhập tối thiểu ${min} kí tự` ;
+        }
+    }
+}
+
+Validator.maxLength = function(selector, max, message) {
+    return {
+        selector: selector,
+        test: function(value) {
+            return value.length <= max ? undefined : message || `Vui lòng không nhập quá ${max} kí tự` ;
         }
     }
 }

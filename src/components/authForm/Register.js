@@ -8,10 +8,13 @@ function Register() {
     const [isRegWithEmail, setIsRegWithEmail] = useState(false)
 
     // Validtor
-    const fullnameRef = useRef("");
-    const emailRef = useRef("");
-    const passwordRef = useRef("");
-    const passwordComformRef = useRef("");
+    const fullnameRef = useRef();
+    const genderRef = useRef();
+    const dateOfBirthRef = useRef();
+    const phoneNumberRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const passwordComformRef = useRef();
 
     useEffect(() => {
         Validator({
@@ -20,6 +23,11 @@ function Register() {
             errorSelector: '.form-message',
             rules: [
                 Validator.isRequire('#fullname', 'Vui lòng nhập vào họ tên của bạn'),
+                Validator.isRequire('#dateOfBirth', 'Vui lòng nhập vào ngày sinh'),
+                Validator.isRequire('#phoneNumber', 'Vui lòng nhập vào số điện thoại'),
+                Validator.isNumber('#phoneNumber', 'Số điện thoại không hợp lệ'),
+                Validator.minLength('#phoneNumber', 9,'Số điện thoại phải có ít nhất 9 số'),
+                Validator.maxLength('#phoneNumber', 11, 'Số điện thoại không được nhiều hơn 11 số'),
                 Validator.isRequire('#email', 'Vui lòng nhập vào Email'),
                 Validator.isEmail('#email', 'Email không hợp lệ hoặc không đúng'),
                 Validator.isRequire('#password', 'Vui lòng nhập mật khẩu'),
@@ -45,11 +53,11 @@ function Register() {
 
     return (
         <div className="flex flex-col space-y-12 w-full">
-            <h2 className="text-center font-bold px-10 sm:px-0 text-2xl sm:text-3xl">Đăng ký tài khoản Smart Points</h2>
+            <h2 className="text-center font-bold px-10 sm:px-0 text-2xl sm:text-3xl">Đăng ký tài khoản<br/>Smart Points</h2>
 
             {isRegWithEmail ? 
                 /* Register form with Email */
-                (<form id="registerForm" className="m-auto w-full px-10 sm:px-16 space-y-2">
+                (<form id="registerForm" className="m-auto w-full px-10 sm:px-16 space-y-2 max-h-[300px] overflow-y-scroll lg:max-h-full lg:overflow-y-hidden">
                     <div 
                         className="absolute top-4 left-4 cursor-pointer"
                         onClick={ backToLoginOptions }
@@ -71,6 +79,62 @@ function Register() {
                         <span className="form-message"></span>
                     </div>
                     <div className="form-group space-y-1 pt-2">
+                        <div className=" flex items-center space-x-5">
+                            <label className="font-medium">Giới tính</label>
+                            <div className="form-control flex space-x-5">
+                                <div className="flex items-center space-x-2">
+                                    <input 
+                                        ref={ genderRef }
+                                        type="radio" 
+                                        name="gender"
+                                        id="gender-male" 
+                                        className="bg-transparent"
+                                        defaultChecked
+                                    /> 
+                                    <label htmlFor="gender-male">Nam</label>
+                                </div>
+                            <div className="flex items-center space-x-2">
+                                    <input 
+                                        ref={ genderRef }
+                                        type="radio" 
+                                        name="gender"
+                                        id="gender-female" 
+                                        className="bg-transparent"
+                                    />
+                                    <label htmlFor="gender-female">Nữ</label>  
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-group space-y-1 pt-2">
+                        <label className="font-medium">Ngày sinh</label>
+                        <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
+                            <input 
+                                ref={ dateOfBirthRef }
+                                type="date"
+                                name="dateOfBirth"
+                                id="dateOfBirth" 
+                                placeholder="mm/dd/yyyy"
+                                className="p-2 outline-none w-full bg-transparent"
+                            /> 
+                        </div>
+                        <span className="form-message"></span>
+                    </div>
+                    <div className="form-group space-y-1 pt-2">
+                        <label className="font-medium">Số điện thoại</label>
+                        <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
+                            <input 
+                                ref={ phoneNumberRef }
+                                type="tel" 
+                                name="phoneNumber"
+                                id="phoneNumber" 
+                                placeholder="Số điện thoại của bạn"
+                                className="p-2 outline-none w-full bg-transparent"
+                            /> 
+                        </div>
+                        <span className="form-message"></span>
+                    </div>
+                    <div className="form-group space-y-1 pt-2">
                         <label className="font-medium">Email</label>
                         <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                             <input 
@@ -84,7 +148,8 @@ function Register() {
                         </div>
                         <span className="form-message"></span>
                     </div>
-                    <div className="form-group space-y-1">
+                    <div className="form-group space-y-1 pt-2">
+                        <label className="font-medium">Mật khẩu</label>
                         <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                             <input 
                                 ref={ passwordRef }
