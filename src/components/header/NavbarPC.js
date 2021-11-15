@@ -33,13 +33,13 @@ function NavbarPC({ user, dispatch }) {
 
             { user ? 
                 /* Sign in */
-                <button className="relative group">
-                    <div className="cursor-pointer flex items-center group">
+                <div className="relative group h-11 flex items-center">
+                    <div className="cursor-pointer flex items-center">
                         <Avatar src={ user.profilePic } sx={{ width: 32, height: 32 }}/>
                         <ArrowDropDownIcon />
                     </div>
                    
-                    <div className="absolute z-[3] top-[130%] right-3 text-black bg-white w-[280px] p-2 rounded-md shadow-lg transform scale-0 group-focus:scale-100 origin-top-right duration-150 ">
+                    <div className="absolute z-[3] top-[101%] right-3 text-black bg-white w-[280px] p-2 rounded-md shadow-lg transform scale-0 group-hover:scale-100 origin-top-right duration-200 ">
                         <div className="flex space-x-4 items-center border-b-2 border-gray-300 pb-2 mb-2">
                             <Avatar src={ user.profilePic } sx={{ width: 40, height: 40 }}/>
                             <div>
@@ -48,10 +48,12 @@ function NavbarPC({ user, dispatch }) {
                             </div>
                         </div>
 
-                        <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
-                            <SettingsIcon />
-                            <div>Chỉnh sửa thông tin cá nhân</div>
-                        </div>
+                        <Link to="./profile">
+                            <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                                <SettingsIcon />
+                                <div>Chỉnh sửa thông tin cá nhân</div>
+                            </div>
+                        </Link>
 
                         <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
                             <FavoriteIcon />
@@ -70,7 +72,7 @@ function NavbarPC({ user, dispatch }) {
                             </div>
                         </div>
                     </div>
-                </button>
+                </div>
             :
                 /* Not sign in */
                 <Link to="./login">
