@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import routes from './routes';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
@@ -23,16 +24,16 @@ function App() {
 
   return (
     <Router>
-      <div className="App relative">
+      <div className="App relative min-h-screen flex flex-col">
         <Header />
 
-        <main className="relative top-16">
+        <main className="relative top-16 flex-1">
             <ScrollToTop />
             { showContentMenus(routes) }
         </main>
 
         {/* Footer */}
-
+        <Footer />
       </div>
     </Router>
   );
