@@ -1,8 +1,9 @@
 import React from 'react'
 import SearchBar from './search/SearchBar'
+import FilterBar from './filter/FilterBar'
 
 function SearchAndFilter() {
-    return (
+    return (<>
         <div className="h-[300px] lg:h-[400px] px-2 lg:px-12 bg-gradient-primary flex flex-col items-center justify-center">
             {/* Intro and search bar */}
             <div className="w-full">
@@ -14,7 +15,9 @@ function SearchAndFilter() {
             </div>
             <SearchBar />
         </div>
-    )
+
+        <FilterBar />
+    </>)
 }
 
 export default SearchAndFilter

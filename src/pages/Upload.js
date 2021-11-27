@@ -82,7 +82,6 @@ function Upload({ user }) {
             form_data.append(`keywordsSearch[${index}]`, keyword)
         })
         
-        console.log(templateFile.name)
         form_data.append('templates_file', templateFile, templateFile.name)
         form_data.append('isPremium', templateIsPremiumRef.current.checked)
 
@@ -239,7 +238,7 @@ function Upload({ user }) {
                                 <input 
                                     ref={ templateSlidesRef }
                                     type="file" 
-                                    onChange={ e => e.target.files && setSlideImgFiles(e.target.files) }
+                                    onChange={ e => { e.target.files && setSlideImgFiles(e.target.files); console.log(templateFile) }}
                                     name="templateSlides"
                                     id="templateSlides" 
                                     className="p-2 outline-none w-full bg-transparent cursor-pointer"
