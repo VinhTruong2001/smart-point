@@ -9,13 +9,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
-import { useRef } from 'react';
 import callApi from '../../utils/apiCaller'
 
 
 function NavbarPC({ user, dispatch }) {
     const history = useHistory();
-    const loginPageRef = useRef(null);
 
     const logout = () => {
         callApi(
@@ -89,13 +87,12 @@ function NavbarPC({ user, dispatch }) {
                 </div>
             :
                 /* Not sign in */
-                <Link to="./login">
+                <Link to="/login">
                     <div className="text-white border-white btn btn-animation before:bg-white">
                         <span>Đăng nhập</span>
                     </div>
                 </Link>
             }
-            <Link ref={ loginPageRef } to="./login" className="hidden"></Link>
         </div>
     )
 }

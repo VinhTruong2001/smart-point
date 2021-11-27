@@ -25,7 +25,7 @@ function Upload({ user }) {
 
     useEffect(() => {
         if (!user) {
-            history.push('./login', { prevPath: location.pathname })
+            history.push('/login', { prevPath: location.pathname })
         } else {
             Validator({
                 form: '#uploadTemplateForm',

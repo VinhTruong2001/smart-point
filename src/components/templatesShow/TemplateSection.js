@@ -11,9 +11,14 @@ function TemplateSection({ title, path, templates, dispatch }) {
         })
     }, [dispatch])
 
-    let templatesList = templates.map((template, index) =>
-        <TemplateFrames key={index} id={template.id} isPremium={template.isPremium} url={template.slide_image}/>
-    )
+    let templatesList = templates.map((template, index) => {
+        return <TemplateFrames 
+                    key={index} 
+                    id={template.id} 
+                    isPremium={template.isPremium} 
+                    url={template.slide_image}
+                />
+    })
 
     return (
         <div>

@@ -19,7 +19,7 @@ function Upgrade({ user }) {
     
     useEffect(() => {
         if (!user) {
-            history.push('./login', { prevPath: location.pathname })
+            history.push('/login', { prevPath: location.pathname })
         }
     }, [user, history, location])
 

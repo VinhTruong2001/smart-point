@@ -5,8 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-function TemplateProduct() {
-    const url = `${process.env.PUBLIC_URL}/test/Art Subject for Elementary - 3rd Grade_ Music by Slidesgo`
+function TemplateProduct({ slideIamges }) {
+    const url = 'http://localhost:8000'
     const settings1 = {
         dots: false,
         infinite: false,
@@ -85,23 +85,17 @@ function TemplateProduct() {
         );
     }
 
-    var slides1 = [];
-    for (let i = 0; i < 56; i++) {
-        slides1.push(
-            <div key={i} className="rounded-md overflow-hidden">
-                <img className="w-full h-[246px] lg:h-[540px]" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
-            </div>
-        );  
-    }
+    let slides1 = slideIamges?.map((slideImage, index) => 
+        <div key={index} className="rounded-md overflow-hidden">
+            <img className="w-full h-[246px] lg:h-[540px]" src={url + slideImage} alt={`slide ${index+1}`} />
+        </div>
+    )
 
-    var slides2 = [];
-    for (let i = 0; i < 56; i++) {
-        slides2.push(
-            <div key={i} className="rounded-md overflow-hidden px-2 outline-none cursor-pointer">
-                <img className="w-full  h-[50px] lg:h-[100px]" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
-            </div>
-        );  
-    }
+    let slides2 = slideIamges?.map((slideImage, index) => 
+        <div key={index} className="rounded-md overflow-hidden px-2">
+            <img className="w-full  h-[50px] lg:h-[100px] rounded-md" src={url + slideImage} alt={`slide ${index+1}`} />
+        </div>
+    )
 
     let slider1, slider2;
     const [nav1, setNav1] = useState(null);

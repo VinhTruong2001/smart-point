@@ -17,7 +17,7 @@ function SearchResult({ match }) {
         callApi('GET', `/api/templates/pagination/?search=${match.params.value}&?page=${match.params.page}`).then(res => {
             let templatesListTemp = res.data.results?.map((template, index) =>
                 <div key={index}>
-                    <TemplateFrames isPremium={template.isPremium} url={template.slide_image}/>
+                    <TemplateFrames isPremium={template.isPremium} id={template.id} url={template.slide_image}/>
                     <Link to={`/templates/${template.id}`}>
                         <h4 className="hover:text-primary mt-2">{template.name}</h4>
                     </Link>
@@ -29,8 +29,6 @@ function SearchResult({ match }) {
             setPrevPage(res.data.previous);
         })
     }, [match, templatesListTemp])
-
-    console.log(match.params.page)
 
     return <>
         <FilterBar />

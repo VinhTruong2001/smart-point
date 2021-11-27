@@ -22,12 +22,11 @@ function Paypal({ value }) {
                 })
             },
             onApprove: async (data, actions) => {
+                // eslint-disable-next-line
                 const order = await actions.order.capture();
-                console.log(order);
                 history.push('/')
             },
             onError: (err) => {
-                console.log(err)
             }
         }).render(paypal.current)
     }, [value, history])

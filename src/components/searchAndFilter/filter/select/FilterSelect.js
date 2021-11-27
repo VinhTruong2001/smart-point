@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function FilterSelect({ optionName, optional, path }) {
     return (
-        <Link to={`/filter/${path}`} className="flex items-center space-x-2 p-1">
+        <Link to={`/filter/${path}/1`} className="flex items-center space-x-2 p-1">
             { optional &&
                 <div 
                     className='rounded-full w-4 h-4 border border-gray-200'
