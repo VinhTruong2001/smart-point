@@ -16,9 +16,9 @@ const routes = [
         main: () => <Homepage />
     },
     {
-        path: '/template',
+        path: '/template/:id',
         exact: true,
-        main: () => <TemplatePage />
+        main: ({match}) => <TemplatePage match={match}/>
     },
     {
         path: '/login',

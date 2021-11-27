@@ -4,7 +4,7 @@ import TemplateFrames from './TemplateFrames'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-function TemplateContent() {
+function TemplateContent({  }) {
     return (
         <div className="mt-8 grid grid-cols-7 space-x-8 space-y-8 md:space-y-0">
             {/* Content */}

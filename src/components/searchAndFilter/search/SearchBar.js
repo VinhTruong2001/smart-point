@@ -8,7 +8,7 @@ function SearchBar({ dispatch, templates }) {
 
     const searchTemplate = (e) => {
         if (e.keyCode === 13) {
-            history.push(`/search/${searchValue.current.value}`);
+            history.push(`/search/${searchValue.current.value}/1`);
             searchValue.current.value = "";
         }
     }

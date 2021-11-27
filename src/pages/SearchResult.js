@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import TemplateFrames from '../components/templatesShow/TemplateFrames';
 import FilterBar from '../components/searchAndFilter/filter/FilterBar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import callApi from '../utils/apiCaller'
 import { Link } from 'react-router-dom';
 
@@ -23,10 +25,12 @@ function SearchResult({ match }) {
                 </div>
             )
             setTemplateList(templatesListTemp);
-            res.data.next && setNextPage(res.data.next);
-            res.data.previous && setPrevPage(res.data.previous);
+            setNextPage(res.data.next);
+            setPrevPage(res.data.previous);
         })
     }, [match, templatesListTemp])
+
+    console.log(match.params.page)
 
     return <>
         <FilterBar />
@@ -38,6 +42,26 @@ function SearchResult({ match }) {
 
             <div className="mt-8 min-w-full grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
                 {templateList}
+            </div>
+            <div className="mt-6 space-x-4 flex justify-center">
+                { prevPage &&
+                    <Link 
+                        to={`/search/${match.params.value}/${parseInt(match.params.page)-1}`}
+                        className="btn !bg-primary text-white !py-4"
+                    >
+                        <ArrowBackIcon />
+                        Trang trước
+                    </Link>
+                }
+                { nextPage &&
+                    <Link 
+                        to={`/search/${match.params.value}/${parseInt(match.params.page)+1}`}
+                        className="btn !bg-primary text-white !py-4"
+                    >
+                        Trang tiếp
+                        <ArrowForwardIcon />
+                    </Link>
+                }
             </div>
         </div>
     </>

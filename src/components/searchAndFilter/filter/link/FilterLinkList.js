@@ -30,9 +30,9 @@ const links = [
 
 function FilterLinkList() {
     return (
-        <div className="pl-3 flex space-x-8 h-full">x
+        <div className="pl-3 flex space-x-8 h-full">
             { links.map((link, index) => (
-                <Link to={`/filter/${link.path}`} key={index} className="m-auto h-full flex items-center cursor-pointer text-gray-500 hover:text-primary">
+                <Link to={`/filter/${link.path}/1`} key={index} className="m-auto h-full flex items-center cursor-pointer text-gray-500 hover:text-primary">
                     <span>{ link.name }</span>
                 </Link>
               ))

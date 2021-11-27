@@ -81,11 +81,11 @@ function Upload({ user }) {
         keywords.forEach((keyword, index) => {
             form_data.append(`keywordsSearch[${index}]`, keyword)
         })
-
+        
+        console.log(templateFile.name)
         form_data.append('templates_file', templateFile, templateFile.name)
         form_data.append('isPremium', templateIsPremiumRef.current.checked)
-    
-        console.log(templateFile.name);
+
         callApi(
             'POST',
             '/api/templates/',
@@ -225,7 +225,7 @@ function Upload({ user }) {
                                 <input 
                                     ref={ templateFileRef }
                                     type="file" 
-                                    onChange={ e => setTemplateFile(e.target.files[1]) }
+                                    onChange={ e => e.target.files[0] && setTemplateFile(e.target.files[0]) }
                                     name="templateFile"
                                     id="templateFile" 
                                     className="p-2 outline-none w-full bg-transparent cursor-pointer"
@@ -239,7 +239,7 @@ function Upload({ user }) {
                                 <input 
                                     ref={ templateSlidesRef }
                                     type="file" 
-                                    onChange={ e => setSlideImgFiles(e.target.files) }
+                                    onChange={ e => e.target.files && setSlideImgFiles(e.target.files) }
                                     name="templateSlides"
                                     id="templateSlides" 
                                     className="p-2 outline-none w-full bg-transparent cursor-pointer"

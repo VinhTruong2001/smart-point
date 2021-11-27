@@ -5,7 +5,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Template from './Template';
 import { Link } from 'react-router-dom';
   
-function TemplateFrames({ isPremium, url }) {
+function TemplateFrames({ id, isPremium, url }) {
     return (
         <div className="relative h-[246px] w-full bg-transparent rounded-md cursor-pointer overflow-hidden group border border-gray-300">
             { isPremium && 
@@ -15,7 +15,7 @@ function TemplateFrames({ isPremium, url }) {
                 </div>
             }
 
-            <Link to="./Template">
+            <Link to={`./template/${id}`}>
                 <Template url={url}/>
             </Link>
             
