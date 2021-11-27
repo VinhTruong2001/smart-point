@@ -1,9 +1,11 @@
 import axios from "axios";
 
-export default function callApi(method = 'GET', url, data) {
+const defaultURL = "http://localhost:8000";
+export default function callApi(method = 'GET', url, data, headers = {}) {
     return axios({
         method,
-        url,
-        data
+        url: defaultURL + url,
+        data,
+        headers,
     })
 }

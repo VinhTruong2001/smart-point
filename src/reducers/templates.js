@@ -1,11 +1,11 @@
-import { SET_USER } from "../constants/ActionTypes";
+import { FETCH_TEMPLATES } from "../constants/ActionTypes";
 
-let initialState = null;
+let initialState = [];
 
 let myReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER:
-            state = action.user;
+        case FETCH_TEMPLATES:
+            state = action.templates;
             return state;
         default:
             return state;

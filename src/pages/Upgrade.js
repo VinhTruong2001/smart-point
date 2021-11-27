@@ -99,6 +99,7 @@ function Upgrade({ user }) {
                                         name="email"
                                         id="email"
                                         className="p-2 outline-none w-full bg-transparent"
+                                        defaultValue={user?.userInfo.email}
                                     /> 
                                 </div>
                                 <span className="form-message"></span>

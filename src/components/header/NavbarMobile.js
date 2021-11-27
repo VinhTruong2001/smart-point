@@ -22,8 +22,8 @@ function NavbarMobile({ user }) {
                     /* Sign in */
                     <div className="flex w-full space-x-2 justify-between items-center cursor-pointer border-b border-gray-400 pb-3">
                         <div className="flex items-center space-x-2">
-                            <Avatar src={ user.profilePic } sx={{ width: 32, height: 32 }}/>
-                            <span >{ user.name }</span>
+                            <Avatar src={ user?.userInfo?.profilePic } sx={{ width: 32, height: 32 }}/>
+                            <span >{ user?.userInfo?.displayName }</span>
                         </div>
                         <ArrowDropDownIcon />
                     </div>
@@ -37,7 +37,7 @@ function NavbarMobile({ user }) {
                 }
     
                 
-                { !user?.type && 
+                { !user?.userInfo?.type && 
                     <Link to='./upgrade'>
                         <div className="text-yellow-400 cursor-pointer flex items-center space-x-1">
                             <EmojiEventsIcon />

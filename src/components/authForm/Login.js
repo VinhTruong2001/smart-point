@@ -3,6 +3,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Validator from '../../utils/validator'
+import callApi from '../../utils/apiCaller'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
 
@@ -12,7 +13,7 @@ function Login({ dispatch }) {
     const [isLoginWithEmail, setIsLoginWithEmail] = useState(false)
 
     // Validtor
-    const emailRef = useRef("");
+    const usernameRef = useRef("");
     const passwordRef = useRef("");
 
     useEffect(() => {
@@ -21,8 +22,7 @@ function Login({ dispatch }) {
             formGroupSelector: '.form-group',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequire('#email', 'Vui lòng nhập vào Email'),
-                Validator.isEmail('#email', 'Email không hợp lệ hoặc không đúng'),
+                Validator.isRequire('#username', 'Vui lòng nhập vào Tên đăng nhập'),
                 Validator.isRequire('#password', 'Vui lòng nhập mật khẩu'),
             ],
             onSubmit: function() {
@@ -40,8 +40,37 @@ function Login({ dispatch }) {
     }
 
     const login = () => {
-        dispatch(setUser(emailRef.current.value, passwordRef.current.value));
-        history.push(location.state?.prevPath || '/');
+        const userAccountLogin = JSON.stringify({
+            username: usernameRef.current.value,
+            password: passwordRef.current.value
+        })
+
+        callApi(
+            'POST',
+            '/api/login/',
+            userAccountLogin,
+            {'Content-Type': 'application/json'}
+        ).then(resToken => {
+            callApi(
+                'GET',
+                '/api/useruid/',
+                null,
+                {'Authorization': `Token ${resToken.data.token}`}
+            ).then(resUID => {
+                callApi(
+                    'GET', 
+                    `/api/userdata/${resUID.data.uid}`, 
+                ).then(resUserData => {
+                    const userSession = {
+                        userInfo: resUserData.data,
+                        token: resToken.data.token
+                    }
+                    
+                    dispatch(setUser(userSession));
+                    history.push(location.state?.prevPath || '/');
+                })
+            })
+        })
     }
 
     return (
@@ -59,14 +88,14 @@ function Login({ dispatch }) {
                         <ArrowBackIosIcon />
                     </div>
                     <div className="form-group space-y-1 pt-2">
-                        <label className="font-medium">Email</label>
+                        <label className="font-medium">Tên đăng nhập</label>
                         <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                             <input 
-                                ref={ emailRef }
+                                ref={ usernameRef }
                                 type="text" 
-                                name="email"
-                                id="email" 
-                                placeholder="Địa chỉ Email"
+                                name="username"
+                                id="username" 
+                                placeholder="Nhập tên đăng nhập"
                                 className="p-2 outline-none w-full bg-transparent"
                             /> 
                         </div>

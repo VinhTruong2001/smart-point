@@ -5,10 +5,10 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Template from './Template';
 import { Link } from 'react-router-dom';
   
-function TemplateFrames({ type, url }) {
+function TemplateFrames({ isPremium, url }) {
     return (
         <div className="relative h-[246px] w-full bg-transparent rounded-md cursor-pointer overflow-hidden group border border-gray-300">
-            { type && 
+            { isPremium && 
                 <div className="absolute top-2 left-2 z-[2] rounded-xl py-1 px-2 text-sm text-yellow-400 cursor-pointer flex items-center space-x-1 bg-gray-700/70">
                     <EmojiEventsIcon fontSize="small"/>
                     <span>Nâng cấp</span>

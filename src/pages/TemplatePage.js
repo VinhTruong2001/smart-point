@@ -9,7 +9,7 @@ function Template() {
             {/* Filter bar */}
             { window.innerWidth >= 740 && <FilterBar /> }
 
-            <div className="body-container py-10">
+            <div className="body-container">
                 <div className="flex flex-col space-y-3">
                     <h1 className="text-primary font-bold  text-2xl lg:text-4xl">Language Arts Subject for Elementary - 2nd Grade: Writing</h1>
                     <span className="text-gray-500 lg:text-lg font-semibold">Giáo dục</span>

@@ -7,7 +7,7 @@
         @apply bg-gradient-to-r from-[#fe3847] to-[#171c44]
     }
     .body-container {
-        @apply px-4 md:px-10 lg:px-20 2xl:px-60;
+        @apply px-4 md:px-10 lg:px-20 2xl:px-60  py-6 md:py-10;
     }
     .form-group.invalid .form-control {
         @apply border-red-500
@@ -71,35 +71,6 @@
 .btn.btn-animation:hover span {
     color: #181c45;
     transition: all var(--duration);
-}
-
-.monitor {
-    width: 515px;
-    height: 300px;
-    border: solid 1em #333;
-    border-radius: .5em;
-}
-
-.stand::before {
-    content:"";
-    position: absolute;
-    background: #222;
-    width: 150px;
-    height: 50px;   
-    bottom: -50px;
-    left: 185px;
-}
-
-.stand::after {
-    content: "";
-    position: absolute;
-    background: #333;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .5em;
-    width: 300px;
-    height: 15px;
-    bottom: -65px;
-    left: 110px;
 }
 
 .slick-list {

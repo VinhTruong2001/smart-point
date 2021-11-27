@@ -40,15 +40,12 @@ function Template({ url }) {
             </div>
         );
     }
-
-    var slides = [];
-    for (var i = 0; i < 56; i++) {
-        slides.push(
-            <div key={i} className="rounded-md overflow-hidden">
-                <img className="w-full h-[246px]" src={`${url}/Slide${i+1}.PNG`} alt={`slide ${i+1}`} />
-            </div>
-        );  
-    }
+    const slidesURLsorted = url.sort();
+    var slides = slidesURLsorted.map((slideImg, index) => 
+        <div key={index} className="rounded-md overflow-hidden">
+            <img className="w-full h-[246px]" src={`http://localhost:8000${slideImg}`} alt={`slide ${index+1}`} />
+        </div>
+    )
 
     return (
         <Slider className="w-full flex items-center justify-center group" {...settings}>

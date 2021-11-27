@@ -1,33 +1,40 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const links = [
     {
-        name: "Giáo dục"
+        name: "Giáo dục",
+        path: "education"
     },
     {
-        name: "Kinh doanh"
+        name: "Kinh doanh",
+        path: "business"
     },
     {
-        name: "Marketing"
+        name: "Marketing",
+        path: "marketing"
     },
     {
-        name: "Y học"
+        name: "Y học",
+        path: "medical"
     },
     {
-        name: "Đa mục đích"
+        name: "Đa mục đích",
+        path: "multiPurpose"
     },
     {
-        name: "Sơ đồ"
+        name: "Sơ đồ",
+        path: "infoGraphic"
     },
 ]
 
 function FilterLinkList() {
     return (
-        <div className="pl-3 flex space-x-8 h-full">
+        <div className="pl-3 flex space-x-8 h-full">x
             { links.map((link, index) => (
-                <div key={index} className="m-auto h-full flex items-center cursor-pointer text-gray-500 hover:text-primary">
+                <Link to={`/filter/${link.path}`} key={index} className="m-auto h-full flex items-center cursor-pointer text-gray-500 hover:text-primary">
                     <span>{ link.name }</span>
-                </div>
+                </Link>
               ))
             }
         </div>

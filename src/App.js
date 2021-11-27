@@ -4,8 +4,29 @@ import Footer from './components/footer/Footer'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import routes from './routes';
 import ScrollToTop from './components/scrollToTop/ScrollToTop';
+import { connect } from 'react-redux';
+import { setUser } from './actions/index';
+import callApi from './utils/apiCaller';
+import { useEffect } from 'react';
 
-function App() {
+function App({ dispatch }) {
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("session"))
+    if (user) {
+      callApi(
+        'GET',
+        '/api/useruid/',
+        null,
+        {'Authorization': `Token ${user.token}`}
+      ).then(() => {
+        dispatch(setUser(user));
+      }).catch(() => {
+        dispatch(setUser(null));
+        sessionStorage.removeItem("session")
+      })
+    }
+  }, [dispatch]);
+
   const showContentMenus = (routes) => {
     var result = '';
 
@@ -39,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, null)(App);

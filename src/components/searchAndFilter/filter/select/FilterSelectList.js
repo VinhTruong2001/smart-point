@@ -5,24 +5,49 @@ const colors = {
     title: "Màu sắc",
     options: [
         {
-            optionName: 'Hồng',
-            optional: '#fe7893',
-        },
-        {
             optionName: 'Đỏ',
-            optional: '#ec3a3a',
-        },
-        {
-            optionName: 'Nâu',
-            optional: '#60341a',
+            optional: 'red',
+            path: 'red'
         },
         {
             optionName: 'Cam',
-            optional: '#ea7d16',
+            optional: 'orange',
+            path: 'orange'
         },
         {
             optionName: 'Vàng',
-            optional: '#fcbd24',
+            optional: 'yellow',
+            path: 'yellow'
+        },
+        {
+            optionName: 'Xanh dương',
+            optional: 'blue',
+            path: 'blue'
+        },
+        {
+            optionName: 'Xanh lá',
+            optional: 'green',
+            path: 'green'
+        },
+        {
+            optionName: 'Tím',
+            optional: 'purple',
+            path: 'purple'
+        },
+        {
+            optionName: 'Nâu',
+            optional: 'brown',
+            path: 'brown'
+        },
+        {
+            optionName: 'Trắng',
+            optional: 'white',
+            path: 'white'
+        },
+        {
+            optionName: 'Đen',
+            optional: 'black',
+            path: 'black'
         },
     ]
 }
@@ -30,17 +55,48 @@ const colors = {
 const styles = {
     title: "Phong cách",
     options: [
-        { optionName: "Mỹ thuật" },
-        { optionName: "Hoạt hình" },
-        { optionName: "Sáng tạo" },
-        { optionName: "Dễ thương" },
-        { optionName: "Tối" },
-        { optionName: "Tao nhã" },
-        { optionName: "Hài hước" },
-        { optionName: "Tiến tiến" },
+        { 
+            optionName: "Thể thao",
+            path: "sport"
+        },
+        { 
+            optionName: "Sáng tạo",
+            path: "creative"
+        },
+        { 
+            optionName: "Đáng yêu",
+            path: "cute"
+        },
+        { 
+            optionName: "Hài hước",
+            path: "funny"
+        },
+        { 
+            optionName: "Hiện đại",
+            path: "modern"
+        },
+        { 
+            optionName: "Đơn giản",
+            path: "simple"
+        },
+        { 
+            optionName: "Hoài cổ",
+            path: "vintage"
+        },
+        { 
+            optionName: "Tao nhã",
+            path: "elegant"
+        },
+        { 
+            optionName: "Hoạt hình",
+            path: "cartoon"
+        },
+        { 
+            optionName: "Tối giản",
+            path: "minimalist"
+        },
     ]
 }
-
 
 
 function FilterSelectList() {
@@ -48,7 +104,8 @@ function FilterSelectList() {
         <div className="relative pr-3 flex items-center space-x-3 h-full before:absolute before:right-0 before:w-[1px] before:h-8 before:bg-gray-300">
             <FilterSelects 
                 title={colors.title} 
-                options={ colors.options }    
+                options={ colors.options }
+                right="-right-14"    
             />
 
             <FilterSelects 

@@ -1,18 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Validator from '../../utils/validator'
+import callApi from '../../utils/apiCaller' 
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/index';
 
-function Register() {
+function Register({ dispatch }) {
+    const history = useHistory();
+    const location = useLocation();
     const [isRegWithEmail, setIsRegWithEmail] = useState(false)
 
     // Validtor
     const fullnameRef = useRef();
-    const genderRef = useRef();
+    const genderMaleRef = useRef();
+    const genderFemaleRef = useRef();
     const dateOfBirthRef = useRef();
     const phoneNumberRef = useRef();
     const emailRef = useRef();
+    const usernameRef = useRef();
     const passwordRef = useRef();
     const passwordComformRef = useRef();
 
@@ -37,9 +44,9 @@ function Register() {
                     return document.querySelector('#registerForm #password').value;
                 }, 'Mật khẩu nhập lại không chính xác'),
             ],
-            // onSubmit: function() {
-            //     login();
-            // }
+            onSubmit: function() {
+                register();
+            }
         })
     })
 
@@ -51,9 +58,60 @@ function Register() {
         setIsRegWithEmail(false);
     }
 
+    const register = () => {
+        const userAccount = JSON.stringify({
+            username: usernameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+        })
+
+        const userInfo = JSON.stringify({
+            displayName: fullnameRef.current.value,
+            email: emailRef.current.value,
+            phone: phoneNumberRef.current.value,
+            isPremium: false,
+            gender: genderMaleRef.current.checked ? genderMaleRef.current.value : genderFemaleRef.current.value,
+            dateOfBirthRef: dateOfBirthRef.current.value
+        })
+
+        const userAccountLogin = JSON.stringify({
+            username: usernameRef.current.value,
+            password: passwordRef.current.value
+        })
+
+        callApi(
+            'POST', 
+            '/api/register/', 
+            userAccount, 
+            {'Content-Type': 'application/json'}
+        ).then(resReg => {
+            callApi(
+                'PUT', 
+                `/api/userdata/${resReg.data.user.uid}`, 
+                userInfo, 
+                {'Content-Type': 'application/json'}
+            ).then(resUID => {
+                callApi(
+                    'POST',
+                    '/api/login/',
+                    userAccountLogin,
+                    {'Content-Type': 'application/json'}
+                ).then(resToken => {
+                    const userSession = {
+                        userInfo: resUID.data,
+                        token: resToken.data.token
+                    }
+
+                    dispatch(setUser(userSession));
+                    history.push(location.state?.prevPath || '/');
+                })
+            })
+        }).catch(err => console.error(err));
+    }
+
     return (
         <div className="flex flex-col space-y-12 w-full">
-            <h2 className="text-center font-bold px-10 sm:px-0 text-2xl sm:text-3xl">Đăng ký tài khoản<br/>Smart Points</h2>
+            <h2 className="text-center font-bold px-10 sm:px-0 text-2xl sm:text-3xl">Đăng ký tài khoản Smart Points</h2>
 
             {isRegWithEmail ? 
                 /* Register form with Email */
@@ -84,10 +142,11 @@ function Register() {
                             <div className="form-control flex space-x-5">
                                 <div className="flex items-center space-x-2">
                                     <input 
-                                        ref={ genderRef }
+                                        ref={ genderMaleRef }
                                         type="radio" 
                                         name="gender"
                                         id="gender-male" 
+                                        value="M"
                                         className="bg-transparent"
                                         defaultChecked
                                     /> 
@@ -95,9 +154,10 @@ function Register() {
                                 </div>
                             <div className="flex items-center space-x-2">
                                     <input 
-                                        ref={ genderRef }
+                                        ref={ genderFemaleRef }
                                         type="radio" 
                                         name="gender"
+                                        value="F"
                                         id="gender-female" 
                                         className="bg-transparent"
                                     />
@@ -143,6 +203,20 @@ function Register() {
                                 name="email"
                                 id="email" 
                                 placeholder="Địa chỉ Email"
+                                className="p-2 outline-none w-full bg-transparent"
+                            /> 
+                        </div>
+                        <span className="form-message"></span>
+                    </div>
+                    <div className="form-group space-y-1 pt-2">
+                        <label className="font-medium">Tên đăng nhập</label>
+                        <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
+                            <input 
+                                ref={ usernameRef }
+                                type="text"
+                                name="username"
+                                id="username" 
+                                placeholder="Tên đăng nhập"
                                 className="p-2 outline-none w-full bg-transparent"
                             /> 
                         </div>
@@ -205,4 +279,4 @@ function Register() {
     )
 }
 
-export default Register
+export default connect(null, null)(Register)
