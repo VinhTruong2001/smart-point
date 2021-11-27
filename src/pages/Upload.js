@@ -21,8 +21,6 @@ function Upload({ user }) {
     const templateFileRef = useRef();
     const templateSlidesRef = useRef();
 
-    const [templateFile, setTemplateFile] = useState(null)
-    const [slideImgFiles, setSlideImgFiles] = useState(null)
     const [isUploadSuccess, setisUploadSuccess] = useState(null)
 
     useEffect(() => {
@@ -65,6 +63,8 @@ function Upload({ user }) {
         const styles = getSelectedOptions(templateStylesRef.current.childNodes);
         const topics = getSelectedOptions(templateTopicsRef.current.childNodes);
         const keywords = templateSearchKeyWordsRef.current.value.split(', ');
+        const templateFile = templateFileRef.current.files[0];
+        const templateSlides = templateSlidesRef.current.files;
 
         form_data.append('name', templateNameRef.current.value)
         form_data.append('description', templateDescriptionRef.current.value)
@@ -91,10 +91,10 @@ function Upload({ user }) {
             form_data, 
             {'Content-Type': 'multipart/form-data'}
         ).then(res => {
-            for(let i = 0; i < slideImgFiles.length; i++) {
+            for(let i = 0; i < templateSlides.length; i++) {
                 let form_data2 = new FormData();
                 form_data2.append('template', res.data.id)
-                form_data2.append('slide_images', slideImgFiles[i], slideImgFiles[i].name)
+                form_data2.append('slide_images', templateSlides[i], templateSlides[i].name)
 
                 callApi(
                     'POST',
@@ -111,18 +111,16 @@ function Upload({ user }) {
     }
 
     const clearForm = () => {
-        templateNameRef.current.value = ''
-        templateColorsRef.current.value = ''
-        templateStylesRef.current.value = ''
-        templateTopicsRef.current.value = ''
-        templateIsPremiumRef.current.value = ''
-        templateDescriptionRef.current.value = ''
-        templateSearchKeyWordsRef.current.value = ''
-        templateFileRef.current.value = null
-        templateSlidesRef.current.value = null
-        setSlideImgFiles(null)
-        setTemplateFile(null)
-        setisUploadSuccess(null)
+        templateNameRef.current.value = '';
+        templateColorsRef.current.value = '';
+        templateStylesRef.current.value = '';
+        templateTopicsRef.current.value = '';
+        templateIsPremiumRef.current.value = '';
+        templateDescriptionRef.current.value = '';
+        templateSearchKeyWordsRef.current.value = '';
+        templateFileRef.current.value = null;
+        templateSlidesRef.current.value = null;
+        setisUploadSuccess(null);
     }
 
     return (
@@ -224,7 +222,6 @@ function Upload({ user }) {
                                 <input 
                                     ref={ templateFileRef }
                                     type="file" 
-                                    onChange={ e => e.target.files[0] && setTemplateFile(e.target.files[0]) }
                                     name="templateFile"
                                     id="templateFile" 
                                     className="p-2 outline-none w-full bg-transparent cursor-pointer"
@@ -238,7 +235,6 @@ function Upload({ user }) {
                                 <input 
                                     ref={ templateSlidesRef }
                                     type="file" 
-                                    onChange={ e => { e.target.files && setSlideImgFiles(e.target.files); console.log(templateFile) }}
                                     name="templateSlides"
                                     id="templateSlides" 
                                     className="p-2 outline-none w-full bg-transparent cursor-pointer"
