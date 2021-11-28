@@ -3,11 +3,31 @@ import '../../styles/navbarMobile.css'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DownloadIcon from '@mui/icons-material/Download';
 import { Avatar } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import callApi from '../../utils/apiCaller';
+import { setUser } from '../../actions';
 
-function NavbarMobile({ user }) {
+function NavbarMobile({ user, dispatch }) {
+    const history = useHistory()
+    
+    const logout = () => {
+        callApi(
+            'POST', 
+            '/api/logout/', 
+            null, 
+            {'Authorization': `Token ${user.token}`}
+        ).then(() => {
+            dispatch(setUser(null));
+            history.push('/login');
+        })
+    }
+
     return (
         <div className="block lg:hidden relative">
             <input type="checkbox" id="toggleNav"/>
@@ -27,6 +47,32 @@ function NavbarMobile({ user }) {
                             <span >{ user?.userInfo?.displayName }</span>
                         </div>
                         <ArrowDropDownIcon />
+                        
+                        <div className="">
+                            <Link to={`/profile/${user?.userInfo?.uid}`}>
+                                <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                                    <SettingsIcon />
+                                    <div>Chỉnh sửa thông tin cá nhân</div>
+                                </div>
+                            </Link>
+
+                            <Link to="/favorite" className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                                <FavoriteIcon />
+                                <div>Danh sách yêu thích</div>
+                            </Link>
+
+                            <Link to="/downloaded" className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                                <DownloadIcon />
+                                <div>Danh sách đã tải</div>
+                            </Link>
+
+                            <div className="pt-2 border-t-2 border-gray-300 mt-2">
+                                <div onClick={ logout } className="w-full flex items-center p-2 space-x-3 text-white bg-primary cursor-pointer rounded-md">
+                                    <LogoutIcon />
+                                    <div>Đăng xuất</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 :
                     /* Not sign in */

@@ -49,7 +49,7 @@ function Template({ url }) {
     const slidesURLsorted = url.sort();
     var slides = slidesURLsorted.map((slideImg, index) => 
         <div key={index} className="rounded-md overflow-hidden">
-            <img className="w-full h-[246px]" src={`http://localhost:8000${slideImg}`} alt={`slide ${index+1}`} />
+            <img className="w-full h-[246px]" src={`https://smartpoints.herokuapp.com/${slideImg}`} alt={`slide ${index+1}`} />
         </div>
     )
 
