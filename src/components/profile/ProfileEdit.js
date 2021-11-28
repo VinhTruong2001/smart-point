@@ -3,11 +3,14 @@ import React, { useRef, useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import callApi from '../../utils/apiCaller'
 import { setUser } from '../../actions'
 import Validator from '../../utils/validator'
+import { useHistory } from 'react-router';
 
 function ProfileEdit({ user, dispatch }) {
+    const history = useHistory();
     const displayNameRef = useRef();
     const phoneRef = useRef();
     const currentPasswordRef = useRef();
@@ -19,6 +22,7 @@ function ProfileEdit({ user, dispatch }) {
     const [preAvatar, setPreviewAva] = useState(null);
 
     const [isChangePassword, setIsChangePassword] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
         Validator({
@@ -55,10 +59,10 @@ function ProfileEdit({ user, dispatch }) {
         e.preventDefault();
         const userUid = user?.userInfo.uid;
         let form_data = new FormData();
-        form_data.append('displayName', displayNameRef.current.value);
+        form_data.append('displayName', displayNameRef.current.value.trim());
         form_data.append('email', user?.userInfo.email);
         form_data.append('profilePic', newAvatar, newAvatar.name);
-        form_data.append('phone', phoneRef.current.value);
+        form_data.append('phone', phoneRef.current.value.trim());
         form_data.append('gender', user?.userInfo.gender);
         form_data.append('dateOfBirth', user?.userInfo.dateOfBirth);
         
@@ -76,6 +80,25 @@ function ProfileEdit({ user, dispatch }) {
         })
     }
 
+    const logout = () => {
+        callApi(
+            'POST', 
+            '/api/logout/', 
+            null, 
+            {'Authorization': `Token ${user.token}`}
+        ).then(() => {
+            dispatch(setUser(null));
+            history.push('/login');
+        })
+    }
+
+    const clearForm = () => {
+        currentPasswordRef.current.value = '';
+        newPasswordRef.current.value = '';
+        newPasswordConfirmRef.current.value = '';
+        setIsSuccess(false);
+    }
+
     const changePassword = () => {
         let form_data = new FormData();
         form_data.append('old_password', currentPasswordRef.current.value)
@@ -89,8 +112,8 @@ function ProfileEdit({ user, dispatch }) {
                 'Authorization': `Token ${user?.token}`,
                 'Content-Type': 'multipart/form-data'
             }
-        ).then(res => {
-
+        ).then(() => {
+            setIsSuccess(true)
         }).catch(err => {
             if (err.response.data.old_password) {
                 currentPasswordErrorRef.current.innerText = "Mật khẩu hiện tại không đúng"
@@ -210,6 +233,29 @@ function ProfileEdit({ user, dispatch }) {
                 </button>
             </div>
         </form>
+
+        { isSuccess &&
+                <div className="absolute top-0 h-screen left-0 right-0 flex">
+                    <div className="fixed top-0 h-screen left-0 right-0 z-20 bg-black opacity-50"></div>
+                    <div className="m-auto z-30 bg-white p-2 lg:p-4 text-center">
+                        <CheckCircleOutlineIcon className="text-green-400 mb-3" sx={{ width: 100, height: 100 }}/>
+                        <div className="space-y-5">
+                            <span className="font-bold lg:text-2xl">Thay đổi mật khẩu thành công</span>
+                            <div className="flex justify-around">
+                                <button 
+                                    className="btn !bg-green-400 text-white"
+                                    onClick={ () => {
+                                        clearForm();
+                                        logout();
+                                    } }
+                                >
+                                    Đăng nhập lại
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            }
     </>)
 }
 

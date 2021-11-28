@@ -5,6 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import callApi from '../utils/apiCaller'
 import { Link } from 'react-router-dom';
+import NotFound from '../components/notFound/NotFound';
 
 function SearchResult({ match }) {
     const [templateList, setTemplateList] = useState(null)
@@ -46,29 +47,35 @@ function SearchResult({ match }) {
             </h1>
             <span className="text-gray-400">Có <b>{totalResults}</b> Temaplates tìm kiếm được với từ khóa <u><b>{match.params.value}</b></u></span>
 
-            <div className="mt-8 min-w-full grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
-                {templateList}
-            </div>
-            <div className="mt-6 space-x-4 flex justify-center">
-                { prevPage &&
-                    <Link 
-                        to={`/search/${match.params.value}/${parseInt(match.params.page)-1}`}
-                        className="btn !bg-primary text-white !py-4"
-                    >
-                        <ArrowBackIcon />
-                        Trang trước
-                    </Link>
-                }
-                { nextPage &&
-                    <Link 
-                        to={`/search/${match.params.value}/${parseInt(match.params.page)+1}`}
-                        className="btn !bg-primary text-white !py-4"
-                    >
-                        Trang tiếp
-                        <ArrowForwardIcon />
-                    </Link>
-                }
-            </div>
+            {(templateList===undefined || templateList?.length===0) ? 
+                <NotFound message="Không tìm thấy kết quả"/>
+                :
+                <>
+                    <div className="mt-8 min-w-full grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
+                        {templateList}
+                    </div>
+                    <div className="mt-6 space-x-4 flex justify-center">
+                        { prevPage &&
+                            <Link 
+                                to={`/search/${match.params.value}/${parseInt(match.params.page)-1}`}
+                                className="btn !bg-primary text-white !py-4"
+                            >
+                                <ArrowBackIcon />
+                                Trang trước
+                            </Link>
+                        }
+                        { nextPage &&
+                            <Link 
+                                to={`/search/${match.params.value}/${parseInt(match.params.page)+1}`}
+                                className="btn !bg-primary text-white !py-4"
+                            >
+                                Trang tiếp
+                                <ArrowForwardIcon />
+                            </Link>
+                        }
+                    </div>
+                </>
+            }
         </div>
     </>
 }

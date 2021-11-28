@@ -67,15 +67,15 @@ function NavbarPC({ user, dispatch }) {
                             </div>
                         </Link>
 
-                        <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                        <Link to="/favorite" className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
                             <FavoriteIcon />
                             <div>Danh sách yêu thích</div>
-                        </div>
+                        </Link>
 
-                        <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
+                        <Link to="/downloaded" className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
                             <DownloadIcon />
                             <div>Danh sách đã tải</div>
-                        </div>
+                        </Link>
 
                         <div className="pt-2 border-t-2 border-gray-300 mt-2">
                             <div onClick={ logout } className="w-full flex items-center p-2 space-x-3 text-white bg-primary cursor-pointer rounded-md">

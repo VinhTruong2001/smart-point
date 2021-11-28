@@ -8,6 +8,11 @@ import Profile from './pages/Profile';
 import SearchResult from './pages/SearchResult';
 import Upload from './pages/Upload';
 import FilterResult from './pages/FilterResult';
+import LatesTemplates from './pages/LatesTemplates';
+import PopularTemplates from './pages/PopularTemplates';
+import DownloadedTemplates from './pages/DownloadedTemplates';
+import FavoriteTemplates from './pages/FavoriteTemplates';
+import ProfileTemplatesUploaded from './pages/ProfileTemplatesUploaded';
 
 const routes = [
     {
@@ -41,6 +46,11 @@ const routes = [
         main: ({match}) => <Profile match={match}/>
     },
     {
+        path: '/profile/:uid/upload',
+        exact: true,
+        main: ({match}) => <ProfileTemplatesUploaded match={match}/>
+    },
+    {
         path: '/search/:value/:page',
         exact: true,
         main: ({match}) => <SearchResult match={match}/>
@@ -54,6 +64,26 @@ const routes = [
         path: '/upload',
         exact: true,
         main: () => <Upload />
+    },
+    {
+        path: '/latest/:page',
+        exact: true,
+        main: ({match}) => <LatesTemplates match={match}/>
+    },
+    {
+        path: '/popular/:page',
+        exact: true,
+        main: ({match}) => <PopularTemplates match={match}/>
+    },
+    {
+        path: '/downloaded',
+        exact: true,
+        main: () => <DownloadedTemplates />
+    },
+    {
+        path: '/favorite',
+        exact: true,
+        main: () => <FavoriteTemplates />
     },
 ];
 

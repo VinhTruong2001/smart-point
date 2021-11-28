@@ -42,7 +42,7 @@ function TemplateContent({ user, dispatch, templateData }) {
         let numberOfTemplates = 0;
         let i = 0
         while(numberOfTemplates < 3 && i < relativeTemplates.length) {
-            if (relativeTemplates[i]?.templates_file !== templateData.template_file) {
+            if (relativeTemplates[i]?.id !== templateData.id) {
                 relativeTemplatesShow.push(
                     <div key={i} className="group">
                         <TemplateFrames 
@@ -125,8 +125,8 @@ function TemplateContent({ user, dispatch, templateData }) {
                     <Link to={`/profile/${author?.uid}`} className="flex space-x-3 items-center group">
                         <Avatar src={author?.profilePic}/>
                         <div className="flex flex-col">
-                            <span className="font-semibold group-hover:text-primary">{author?.name || 'Trương Đức Vinh'}</span>
-                            <span className="font-light text-gray-400">{author?.email || 'ducvinh.truong2001@gmail.com'}</span>
+                            <span className="font-semibold group-hover:text-primary">{author?.displayName || 'Ẩn danh'}</span>
+                            <span className="font-light text-gray-400">{author?.email || 'anonymous@ano.com'}</span>
                         </div>
                     </Link>
                 </div>

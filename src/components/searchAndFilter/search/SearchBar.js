@@ -15,7 +15,7 @@ function SearchBar({ dispatch, templates }) {
 
     return (
         <div 
-            className="min-w-[300px] xl:min-w-[650px] flex py-3 px-2 bg-white rounded-lg"
+            className="min-w-[150px] xl:min-w-[650px] flex py-3 px-2 bg-white rounded-lg"
         >
             <input 
                 ref={ searchValue } 

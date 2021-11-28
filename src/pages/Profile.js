@@ -9,7 +9,7 @@ function Profile({user, match}) {
             { user?.userInfo.uid === match.params.uid ?
                 <ProfileEdit />
                 :
-                <ProfileView />
+                <ProfileView uid={match.params.uid}/>
             }
         </div>
     )
