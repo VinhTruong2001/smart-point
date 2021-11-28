@@ -253,13 +253,13 @@ function Upload({ user }) {
                                     className="outline-none bg-transparent cursor-pointer"
                                     disabled={ !user?.userInfo.isPremium }
                                 />
-                                <label htmlFor="isPremium" className="flex items-center space-x-2 text-lg text-yellow-400">
+                                <label htmlFor="isPremium" className="flex items-center space-x-2 text-yellow-400 md:text-lg">
                                     <span>Chỉ cho phép người dùng nâng cấp tải về</span>
                                     <EmojiEventsIcon />
                                 </label> 
                             </div> 
                             { !user?.userInfo.isPremium &&
-                                <span className="text-primary">
+                                <span className="text-primary text-sm md:text-medium">
                                     Chỉ người dùng đã nâng cấp mới có thể bán Template. Nâng cấp ngay <Link to="/upgrade" className="text-yellow-400 underline">tại đây</Link>
                                 </span>
                             }

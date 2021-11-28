@@ -2,6 +2,7 @@ import React from 'react'
 import '../../styles/navbarMobile.css'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -46,7 +47,10 @@ function NavbarMobile({ user }) {
                     </Link>
                 }  
 
-                <div className="cursor-pointer">Mẹo vặt &amp; Hướng dẫn</div> 
+                <Link to="/upload" className="cursor-pointer flex items-center">
+                    <UploadFileIcon className="mr-2"/>
+                    Đăng tải Template
+                </Link> 
             </div>
         </div>
     )
