@@ -173,7 +173,11 @@ function Upgrade({ user }) {
                     </div>
 
                     { checkout ? (
-                        <Paypal value={document.querySelector("input[name='price']:checked").value}/>
+                        <Paypal  
+                            uid={user.userInfo.uid}
+                            token={user.token}
+                            value={document.querySelector("input[name='price']:checked").value}
+                        />
                         ) : (
                             <button 
                                 type="submit"

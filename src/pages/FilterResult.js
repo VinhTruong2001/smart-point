@@ -14,10 +14,15 @@ function FilterResult({ match }) {
     let templatesListTemp
 
     useEffect(() => {
-        callApi('GET', `/api/templates/?search=${match.params.value}`).then(res => {
-            let templatesListTemp = res.data.map((template, index) => 
+        callApi('GET', `/api/templates/standard-pagination/?search=${match.params.value}&?page=${match.params.page}`).then(res => {
+            let templatesListTemp = res.data.results?.map((template, index) => 
                 <div key={index}>
-                    <TemplateFrames isPremium={template.isPremium} id={template.id} url={template.slide_image}/>
+                    <TemplateFrames 
+                        isPremium={template.isPremium} 
+                        templateFile={template.templates_file} 
+                        id={template.id} 
+                        url={template.slide_image}
+                    />
                     <Link to={`/template/${template.id}`}>
                         <h4 className="hover:text-primary mt-2">{template.name}</h4>
                     </Link>

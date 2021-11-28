@@ -13,7 +13,7 @@ function Footer() {
             </div>
             <div>
                 <div className="font-medium text-2xl mb-3">Hỗ trợ mua bán các Template</div>
-                <p className="text-lg">Smart Points cung cấp môi trường cho các nhà thiết kế template có thể chia sẻ các mẫu template của mình hoặc có thể bán chùng cho các người dùng đã nâng cấp tài khoản.</p>
+                <p className="text-lg">Smart Points cung cấp môi trường cho các nhà thiết kế template có thể chia sẻ các mẫu template của mình hoặc có thể bán chúng cho những người dùng đã nâng cấp tài khoản.</p>
             </div>
             <div>
                 <div className="font-medium text-2xl mb-3">Liên hệ</div>

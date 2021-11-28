@@ -47,7 +47,8 @@ function TemplateContent({ user, dispatch, templateData }) {
                     <div key={i} className="group">
                         <TemplateFrames 
                             id={relativeTemplates[i].id}
-                            isPremium={relativeTemplates[i].isPremium} 
+                            isPremium={relativeTemplates[i].isPremium}
+                            templateFile={relativeTemplates[i].templates_file}  
                             url={relativeTemplates[i].slide_image}
                         />
                         <Link to={`/template/${relativeTemplates[i].id}`} className="font-semibold group-hover:text-primary">
@@ -121,7 +122,7 @@ function TemplateContent({ user, dispatch, templateData }) {
                 {/* Author */}
                 <div className="space-y-3">
                     <h4 className="font-bold text-primary text-xl">Người đăng</h4>
-                    <Link className="flex space-x-3 items-center group">
+                    <Link to={`/profile/${author?.uid}`} className="flex space-x-3 items-center group">
                         <Avatar src={author?.profilePic}/>
                         <div className="flex flex-col">
                             <span className="font-semibold group-hover:text-primary">{author?.name || 'Trương Đức Vinh'}</span>
@@ -134,7 +135,7 @@ function TemplateContent({ user, dispatch, templateData }) {
                      {/* Reaction btn */}
                     <div className="grid grid-flow-col space-x-3">
                         {/* Download button */}
-                        { user?.userInfo.isPremium === templateData.isPremium ?
+                        { (user?.userInfo.isPremium && templateData.isPremium) || !templateData.isPremium ?
                             <a 
                                 href={templateData.templates_file} 
                                 className="col-span-6 rounded-lg cursor-pointer"

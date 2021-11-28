@@ -29,7 +29,7 @@ function Register({ dispatch }) {
             formGroupSelector: '.form-group',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequire('#fullname', 'Vui lòng nhập vào họ tên của bạn'),
+                Validator.isRequire('#fullname', 'Vui lòng nhập vào tên hiển thị'),
                 Validator.isRequire('#dateOfBirth', 'Vui lòng nhập vào ngày sinh'),
                 Validator.isRequire('#phoneNumber', 'Vui lòng nhập vào số điện thoại'),
                 Validator.isNumber('#phoneNumber', 'Số điện thoại không hợp lệ'),
@@ -71,7 +71,7 @@ function Register({ dispatch }) {
             phone: phoneNumberRef.current.value,
             isPremium: false,
             gender: genderMaleRef.current.checked ? genderMaleRef.current.value : genderFemaleRef.current.value,
-            dateOfBirthRef: dateOfBirthRef.current.value
+            dateOfBirth: dateOfBirthRef.current.value
         })
 
         const userAccountLogin = JSON.stringify({
@@ -123,14 +123,14 @@ function Register({ dispatch }) {
                         <ArrowBackIosIcon />
                     </div>
                     <div className="form-group space-y-1 pt-2">
-                        <label className="font-medium">Tên của bạn</label>
+                        <label className="font-medium">Tên hiển thị</label>
                         <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                             <input 
                                 ref={ fullnameRef }
                                 type="text" 
                                 name="fullname"
                                 id="fullname" 
-                                placeholder="Nhập vào tên của bạn"
+                                placeholder="Nhập vào tên hiển thị"
                                 className="p-2 outline-none w-full bg-transparent"
                             /> 
                         </div>

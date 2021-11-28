@@ -10,20 +10,27 @@ function SearchResult({ match }) {
     const [templateList, setTemplateList] = useState(null)
     const [nextPage, setNextPage] = useState(null)
     const [prevPage, setPrevPage] = useState(null)
+    const [totalResults, setTotalResults] = useState(0) 
 
     let templatesListTemp
 
     useEffect(() => {
-        callApi('GET', `/api/templates/pagination/?search=${match.params.value}&?page=${match.params.page}`).then(res => {
+        callApi('GET', `/api/templates/standard-pagination/?search=${match.params.value}&?page=${match.params.page}`).then(res => {
             let templatesListTemp = res.data.results?.map((template, index) =>
                 <div key={index}>
-                    <TemplateFrames isPremium={template.isPremium} id={template.id} url={template.slide_image}/>
+                    <TemplateFrames 
+                        isPremium={template.isPremium} 
+                        templateFile={template.templates_file} 
+                        id={template.id} 
+                        url={template.slide_image}
+                    />
                     <Link to={`/templates/${template.id}`}>
                         <h4 className="hover:text-primary mt-2">{template.name}</h4>
                     </Link>
                     <p className="text-justify text-gray-400 font-light line-clamp-3">{template.description}</p>
                 </div>
             )
+            setTotalResults(res.data.count)
             setTemplateList(templatesListTemp);
             setNextPage(res.data.next);
             setPrevPage(res.data.previous);
@@ -37,6 +44,7 @@ function SearchResult({ match }) {
                 Kết quả tìm kiếm cho&nbsp;
                 <span className="text-primary underline">{match.params.value}</span>
             </h1>
+            <span className="text-gray-400">Có <b>{totalResults}</b> Temaplates tìm kiếm được với từ khóa <u><b>{match.params.value}</b></u></span>
 
             <div className="mt-8 min-w-full grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
                 {templateList}

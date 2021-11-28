@@ -83,7 +83,7 @@ function TemplateFrames({ user, dispatch, id, isPremium, url, templateFile }) {
                         }
                     </div>
                         
-                    { user?.userInfo.isPremium === isPremium ?
+                    { (isPremium && user?.userInfo.isPremium) || !isPremium ?
                         <a href={templateFile} onClick={downloadTemplate} className="realtive bg-primary text-white p-0.5 rounded-md group">
                             <FileDownloadIcon fontSize="small"/>
                         </a>

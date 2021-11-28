@@ -1,20 +1,43 @@
 import { Avatar } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import callApi from '../../utils/apiCaller'
 import { setUser } from '../../actions'
+import Validator from '../../utils/validator'
 
 function ProfileEdit({ user, dispatch }) {
     const displayNameRef = useRef();
     const phoneRef = useRef();
     const currentPasswordRef = useRef();
+    const currentPasswordErrorRef = useRef();
     const newPasswordRef = useRef();
     const newPasswordConfirmRef = useRef();
     const filePickerRef = useRef();
     const [newAvatar, setAvatar] = useState(null);
     const [preAvatar, setPreviewAva] = useState(null);
+
+    const [isChangePassword, setIsChangePassword] = useState(false);
+
+    useEffect(() => {
+        Validator({
+            form: '#changePasswordForm',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequire('#currentPassword', 'Vui lòng nhập mật khẩu hiện tại của bạn'),
+                Validator.isRequire('#newPassword', 'Vui lòng nhập mật khẩu'),
+                Validator.isRequire('#newPasswordConfirm', 'Vui lòng nhập lại mật khẩu'),
+                Validator.isConfirmed('#newPasswordConfirm', function() {
+                    return document.querySelector('#changePasswordForm #newPassword').value;
+                }, 'Mật khẩu nhập lại không chính xác'),
+            ],
+            onSubmit: function() {
+                changePassword();
+            }
+        })
+    })
 
     const uploadAvatarFile = (e) => {
         const reader = new FileReader();
@@ -52,6 +75,29 @@ function ProfileEdit({ user, dispatch }) {
             dispatch(setUser(userConfig))
         })
     }
+
+    const changePassword = () => {
+        let form_data = new FormData();
+        form_data.append('old_password', currentPasswordRef.current.value)
+        form_data.append('new_password', newPasswordRef.current.value)
+
+        callApi(
+            'PUT', 
+            '/api/change-password/', 
+            form_data, 
+            {
+                'Authorization': `Token ${user?.token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        ).then(res => {
+
+        }).catch(err => {
+            if (err.response.data.old_password) {
+                currentPasswordErrorRef.current.innerText = "Mật khẩu hiện tại không đúng"
+                currentPasswordErrorRef.current.parentElement.classList.add('invalid')
+            }
+        })
+    } 
 
     return (<>
         <form onSubmit={ uploadToServer } className="relative">
@@ -104,7 +150,7 @@ function ProfileEdit({ user, dispatch }) {
 
             {/* Change password model and Update button */}
             <div className="absolute bottom-0 right-0 flex space-x-4">
-                <div className="border border-gray-300 p-2 rounded-lg cursor-pointer">
+                <div onClick={() => setIsChangePassword(!isChangePassword)} className="border border-gray-300 p-2 rounded-lg cursor-pointer">
                     Thay đổi mật khẩu
                 </div>
 
@@ -113,11 +159,11 @@ function ProfileEdit({ user, dispatch }) {
                 </button>
             </div>
         </form>
-
-        <form className="pt-10">
-            <h3 className="font-bold text-primary text-2xl">Thay đổi mật khẩu</h3>
-            <div className="ml-10 w-[40%]">
-                <div className="form-group space-y-1 pt-2">
+            
+        <form id="changePasswordForm" className={`pt-10 w-full transform scale-y-0 transition duration-300 origin-top ${isChangePassword && 'scale-y-100'}`}>
+            <h3 className="font-bold text-primary text-center text-2xl">Thay đổi mật khẩu</h3>
+            <div className="w-full flex flex-col items-center ">
+                <div className="form-group w-full lg:w-[40%] space-y-1 pt-2">
                     <label className="font-medium">Mật khẩu hiện tại</label>
                     <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                         <input 
@@ -129,9 +175,9 @@ function ProfileEdit({ user, dispatch }) {
                             className="p-2 outline-none w-full bg-transparent"
                         /> 
                     </div>
-                    <span className="form-message"></span>
+                    <span ref={currentPasswordErrorRef} className="form-message"></span>
                 </div>
-                <div className="form-group space-y-1 pt-2">
+                <div className="form-group w-full lg:w-[40%] space-y-1 pt-2">
                     <label className="font-medium">Mật khẩu mới</label>
                     <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                         <input 
@@ -145,7 +191,7 @@ function ProfileEdit({ user, dispatch }) {
                     </div>
                     <span className="form-message"></span>
                 </div>
-                <div className="form-group space-y-1 pt-2">
+                <div className="form-group w-full lg:w-[40%] space-y-1 pt-2">
                     <label className="font-medium">Nhập lại mật khẩu mới</label>
                     <div className="border border-gray-300 rounded-full overflow-hidden px-2 bg-gray-100 form-control">
                         <input 
@@ -159,6 +205,9 @@ function ProfileEdit({ user, dispatch }) {
                     </div>
                     <span className="form-message"></span>
                 </div>
+                <button className="btn !bg-primary text-white w-full lg:w-[40%] mt-5">
+                    Cập nhật
+                </button>
             </div>
         </form>
     </>)

@@ -7,14 +7,20 @@ function TemplatesShow() {
             <TemplateSection 
                 title="Các Templates mới"
                 path="/latest"
+                order="create_at"
+                search={null}
             />
             <TemplateSection 
                 title="Các Templates tải nhiều nhất"
                 path="/popular"
+                order="downloaded"
+                search={null}
             />
             <TemplateSection 
                 title="Sơ đồ"
                 path="/infographic"
+                search="infographic"
+                order={null}
             />
         </div>
     )

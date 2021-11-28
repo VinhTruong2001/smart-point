@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TemplateFrames from './TemplateFrames'
-import { connect } from 'react-redux';
-import { fetchTemplates } from '../../actions';
 import callApi from '../../utils/apiCaller'
 
-function TemplateSection({ title, path, templates, dispatch }) {
-    useEffect(() => {
-        callApi('GET', '/api/templates/', null).then(res => {
-            dispatch(fetchTemplates(res.data));
-        })
-    }, [dispatch])
+function TemplateSection({ title, path, search, order }) {
+    const [templates, setTemplates] = useState(null)
 
-    let templatesList = templates.map((template, index) => {
+    useEffect(() => {
+        if (search) {
+            callApi('GET', `/api/templates/small-pagination/?search=${search}&page=1`).then(res => {
+                setTemplates(res.data.results)
+            })
+        } else if (order) {
+            callApi('GET', `/api/templates/small-pagination/?ordering=${order}&page=1`).then(res => {
+                setTemplates(res.data.results)
+            })
+        }
+    }, [search, order])
+
+    let templatesList = templates?.map((template, index) => {
         return <TemplateFrames 
                     key={index} 
                     id={template.id} 
-                    isPremium={template.isPremium} 
+                    isPremium={template.isPremium}
+                    templateFile={template.templates_file} 
                     url={template.slide_image}
                 />
     })
@@ -38,10 +45,4 @@ function TemplateSection({ title, path, templates, dispatch }) {
     )
 }
 
-function mapStateToProps(state) {
-    return {
-        templates: state.templates
-    }
-}
-
-export default connect(mapStateToProps, null)(TemplateSection)
+export default TemplateSection

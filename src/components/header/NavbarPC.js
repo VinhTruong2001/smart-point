@@ -34,7 +34,7 @@ function NavbarPC({ user, dispatch }) {
                 <UploadFileIcon />
             </Link>
 
-            { !user?.userInfo?.type &&
+            { !user?.userInfo?.isPremium &&
                 <Link to="/upgrade">
                     <div className="text-yellow-400 cursor-pointer flex items-center space-x-1">
                         <EmojiEventsIcon />
@@ -60,7 +60,7 @@ function NavbarPC({ user, dispatch }) {
                             </div>
                         </div>
 
-                        <Link to={`./profile/${user?.userInfo?.uid}`}>
+                        <Link to={`/profile/${user?.userInfo?.uid}`}>
                             <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
                                 <SettingsIcon />
                                 <div>Chỉnh sửa thông tin cá nhân</div>
