@@ -41,8 +41,8 @@ function TemplateContent({ user, dispatch, templateData }) {
     if (relativeTemplates) {
         let numberOfTemplates = 0;
         let i = 0
-        while(numberOfTemplates < 3) {
-            if (relativeTemplates[i].templates_file !== templateData.template_file) {
+        while(numberOfTemplates < 3 && i < relativeTemplates.length) {
+            if (relativeTemplates[i]?.templates_file !== templateData.template_file) {
                 relativeTemplatesShow.push(
                     <div key={i} className="group">
                         <TemplateFrames 
