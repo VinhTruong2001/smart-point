@@ -38,21 +38,21 @@ function NavbarMobile({ user, dispatch }) {
             <div className="line third"></div>
 
             <label htmlFor="toggleNav" className="hidden overlay bg-black opacity-50 fixed z-2 top-0 bottom-0 right-0 left-0"></label>
-            <div className="navbar-mobile-list fixed z-2 top-0 bottom-0 right-0 left-1/2 md:left-2/3 bg-white shadow-lg flex flex-col space-y-5 items-end px-2 pt-16">
+            <div className="navbar-mobile-list fixed z-2 top-0 bottom-0 right-0 left-[43%] md:left-2/3 bg-white shadow-lg flex flex-col space-y-5 items-end px-2 pt-16">
                 { user ?
                     /* Sign in */
-                    <div className="flex w-full space-x-2 justify-between items-center cursor-pointer border-b border-gray-400 pb-3">
-                        <div className="flex items-center space-x-2">
+                    <div className="flex flex-col w-full space-x-2 justify-between items-center">
+                        <div className="flex items-center space-x-2  cursor-pointer border-b border-gray-400 pb-3">
                             <Avatar src={ user?.userInfo?.profilePic } sx={{ width: 32, height: 32 }}/>
                             <span >{ user?.userInfo?.displayName }</span>
+                            <ArrowDropDownIcon />
                         </div>
-                        <ArrowDropDownIcon />
                         
                         <div className="">
                             <Link to={`/profile/${user?.userInfo?.uid}`}>
                                 <div className="flex items-center p-2 space-x-3 text-gray-600 hover:bg-gray-200 cursor-pointer rounded-full">
                                     <SettingsIcon />
-                                    <div>Chỉnh sửa thông tin cá nhân</div>
+                                    <div>Sửa thông tin cá nhân</div>
                                 </div>
                             </Link>
 
@@ -65,13 +65,6 @@ function NavbarMobile({ user, dispatch }) {
                                 <DownloadIcon />
                                 <div>Danh sách đã tải</div>
                             </Link>
-
-                            <div className="pt-2 border-t-2 border-gray-300 mt-2">
-                                <div onClick={ logout } className="w-full flex items-center p-2 space-x-3 text-white bg-primary cursor-pointer rounded-md">
-                                    <LogoutIcon />
-                                    <div>Đăng xuất</div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 :
