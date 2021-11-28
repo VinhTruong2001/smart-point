@@ -1,29 +1,32 @@
-export const topics = [
-    {
-        optionName: "Giáo dục",
-        path: "education"
-    },
-    {
-        optionName: "Kinh doanh",
-        path: "business"
-    },
-    {
-        optionName: "Marketing",
-        path: "marketing"
-    },
-    {
-        optionName: "Y học",
-        path: "medical"
-    },
-    {
-        optionName: "Đa mục đích",
-        path: "multiPurpose"
-    },
-    {
-        optionName: "Sơ đồ",
-        path: "infoGraphic"
-    },
-]
+export const topics = {
+    title: "Chủ đề",
+    options: [
+        {
+            optionName: "Giáo dục",
+            path: "education"
+        },
+        {
+            optionName: "Kinh doanh",
+            path: "business"
+        },
+        {
+            optionName: "Marketing",
+            path: "marketing"
+        },
+        {
+            optionName: "Y học",
+            path: "medical"
+        },
+        {
+            optionName: "Đa mục đích",
+            path: "multiPurpose"
+        },
+        {
+            optionName: "Sơ đồ",
+            path: "infoGraphic"
+        },
+    ]
+}
 
 export const colors = {
     title: "Màu sắc",
@@ -123,18 +126,5 @@ export const styles = {
 }
 
 export function tranferLanguage(category, name) {
-    let searchAt;
-    switch (category) {
-        case "colors":
-            searchAt = colors.options;
-            break;
-        case "styles":
-            searchAt = styles.options;
-            break;
-        default:
-            searchAt = topics;
-    }
-
-
-    return searchAt.find(option => option.path === name).optionName
+    return category.options.find(option => option.path === name).optionName
 }
