@@ -21,7 +21,10 @@ function FilterMobile({ title, list, height }) {
                 <ArrowDropDownIcon />
             </div>
             
-            <div className={`mt-2 transform ${listStatus ? 'scale-y-0 h-0' : `scaly-y-100 h-[${height}px]`} transition-all duration-300 origin-top`}>
+            <div 
+                className={`mt-2 transform ${listStatus ? 'scale-y-0' : 'scaly-y-100'} transition-all duration-300 origin-top`}
+                style={{ height: `${listStatus ? 0 : height}px`}}
+            >
                 { items }
             </div>
         </div>

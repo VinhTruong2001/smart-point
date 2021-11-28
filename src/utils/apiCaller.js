@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const defaultURL = "https://smartpoints.herokuapp.com";
+const defaultURL = "https://smartpoint.herokuapp.com";
 export default function callApi(method = 'GET', url, data, headers = {}) {
     return axios({
         method,

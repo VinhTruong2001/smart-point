@@ -106,8 +106,8 @@ function NavbarMobile({ user, dispatch }) {
                 </Link>
                 
                 <FilterMobile title={topics.title} list={topics.options} height="240"/>
-                <FilterMobile title={colors.title} list={colors.options}/>
-                <FilterMobile title={styles.title} list={styles.options}/>
+                <FilterMobile title={colors.title} list={colors.options} height="350"/>
+                <FilterMobile title={styles.title} list={styles.options} height="350"/>
             </div>
         </div>
     )
