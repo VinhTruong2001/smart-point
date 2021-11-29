@@ -7,7 +7,7 @@ function TemplatesShow() {
             <TemplateSection 
                 title="Các Templates mới"
                 path="/latest/1"
-                order="create_at"
+                order="-create_at"
                 search={null}
             />
             <TemplateSection 
