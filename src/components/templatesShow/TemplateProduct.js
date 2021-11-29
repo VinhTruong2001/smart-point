@@ -6,7 +6,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function TemplateProduct({ slideIamges }) {
-    const url = 'http://localhost:8000'
+    const url = 'https://smartpoints.herokuapp.com'
     const settings1 = {
         dots: false,
         infinite: false,
