@@ -137,5 +137,5 @@ export function tranferLanguage(category, name) {
         default:
             searchAt = styles;
     }
-    return category.options.find(option => option.path === name).optionName
+    return searchAt.options.find(option => option.path === name).optionName
 }
