@@ -49,7 +49,7 @@ function FilterResult({ match }) {
                     <div className="mt-6 space-x-4 flex justify-center">
                         { prevPage &&
                             <Link 
-                                to={`/search/${match.params.value}/${parseInt(match.params.page)-1}`}
+                                to={`/filter/${match.params.value}/${parseInt(match.params.page)-1}`}
                                 className="btn !bg-primary text-white !py-4"
                             >
                                 <ArrowBackIcon />
@@ -58,7 +58,7 @@ function FilterResult({ match }) {
                         }
                         { nextPage &&
                             <Link 
-                                to={`/search/${match.params.value}/${parseInt(match.params.page)+1}`}
+                                to={`/filter/${match.params.value}/${parseInt(match.params.page)+1}`}
                                 className="btn !bg-primary text-white !py-4"
                             >
                                 Trang tiếp
