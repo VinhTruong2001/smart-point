@@ -126,5 +126,16 @@ export const styles = {
 }
 
 export function tranferLanguage(category, name) {
+    let searchAt;
+    switch (category) {
+        case "topics":
+            searchAt = topics;
+            break;
+        case "colors":
+            searchAt = colors;
+            break;
+        default:
+            searchAt = styles;
+    }
     return category.options.find(option => option.path === name).optionName
 }
