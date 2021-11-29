@@ -13,7 +13,7 @@ function ProfileView({ uid }) {
         callApi('GET', `/api/userdata/${uid}`).then(res => {
             setOtherUser(res.data);
         })
-        callApi('GET', `/api/templates/small-pagination/${uid}`).then(res =>
+        callApi('GET', `/api/templates/small-pagination/?search=${uid}`).then(res =>
             setTemplateUploaded(res.data)
         )
     }, [uid])
