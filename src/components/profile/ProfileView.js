@@ -53,7 +53,9 @@ function ProfileView({ uid }) {
             { (listTemplatesUploaded===undefined || listTemplatesUploaded?.length===0) ? 
                 <NotFound message="Người dùng này chưa đăng lên bất kỳ Template nào"/>
                 :
-                listTemplatesUploaded
+                <div className="mt-8 min-w-full grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
+                    {listTemplatesUploaded}
+                </div>
             }
             { templateUploaded?.next && 
                 <div className="m-auto">
