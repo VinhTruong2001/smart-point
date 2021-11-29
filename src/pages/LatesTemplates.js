@@ -45,7 +45,7 @@ function LatesTemplates({ match }) {
                 {templateList}
             </div>
             <div className="mt-6 space-x-4 flex justify-center">
-                { prevPage &&
+                { prevPage && prevPage !== `http://localhost:8000/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}` &&
                     <Link 
                         to={`/latest/${parseInt(match.params.page)-1}`}
                         className="btn !bg-primary text-white !py-4"
@@ -54,7 +54,7 @@ function LatesTemplates({ match }) {
                         Trang trước
                     </Link>
                 }
-                { nextPage &&
+                { nextPage && nextPage !== `http://localhost:8000/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}` &&
                     <Link 
                         to={`/latest/${parseInt(match.params.page)+1}`}
                         className="btn !bg-primary text-white !py-4"
