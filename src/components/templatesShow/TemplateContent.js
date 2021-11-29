@@ -8,6 +8,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
 import { Avatar } from '@mui/material';
+import NotFound from '../notFound/NotFound';
 
 function TemplateContent({ user, dispatch, templateData }) {
     const history = useHistory();
@@ -189,14 +190,20 @@ function TemplateContent({ user, dispatch, templateData }) {
         {/* Relative templates */}
         <div className="mt-16 mb-8">
             <h4 className="text-primary font-semibold text-2xl my-4">Các Template có chủ đề tương tự</h4>
-            <div className="grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
-                { relativeTemplatesShow }
-            </div>
-            <div className="w-full flex mt-3">
-                <Link to={`/filter/${templateData.topics[0]}/1`} className="m-auto cursor-pointer py-2 px-3 bg-primary text-white rounded-md">
-                    Xem thêm
-                </Link>
-            </div>
+            { relativeTemplatesShow.length > 0 ? 
+                <>
+                    <div className="grid grid-cols-1 gap-y-5 sm:grid-cols-2 xl:grid-cols-3 sm:gap-x-5 sm:gap-y-7">
+                        { relativeTemplatesShow }
+                    </div>
+                    <div className="w-full flex mt-3">
+                        <Link to={`/filter/${templateData.topics[0]}/1`} className="m-auto cursor-pointer py-2 px-3 bg-primary text-white rounded-md">
+                            Xem thêm
+                        </Link>
+                    </div>
+                </>
+                :
+                <NotFound message="Chưa có Template nào cùng chủ đề được thêm vào"/>
+            }
         </div>
     </>)
 }

@@ -18,7 +18,8 @@ function Upgrade({ user }) {
     const [checkout, setCheckout] = useState(false);
     
     useEffect(() => {
-        if (!user) {
+        const userSession = JSON.parse(sessionStorage.getItem("session"))
+        if (!userSession) {
             history.push('/login', { prevPath: location.pathname })
         }
     }, [user, history, location])

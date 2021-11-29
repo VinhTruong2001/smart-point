@@ -6,6 +6,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { Link, useHistory, useLocation } from 'react-router-dom'
+import '../styles/loadingAnimation.css';
 
 function Upload({ user }) {
     const history = useHistory();
@@ -22,9 +23,11 @@ function Upload({ user }) {
     const templateSlidesRef = useRef();
 
     const [isUploadSuccess, setisUploadSuccess] = useState(null)
+    const [isUploading, setisUploading] = useState(null)
 
     useEffect(() => {
-        if (!user) {
+        const userSession = JSON.parse(sessionStorage.getItem("session"))
+        if (!userSession) {
             history.push('/login', { prevPath: location.pathname })
         } else {
             Validator({
@@ -46,7 +49,7 @@ function Upload({ user }) {
             })
         }
     // eslint-disable-next-line
-    }, [user, history, location])
+    }, [user, history, location, isUploading, isUploadSuccess])
 
     const getSelectedOptions = (optionsNodeList) => {
         const result = [];
@@ -57,6 +60,7 @@ function Upload({ user }) {
     }
 
     const uploadToServer = () => {
+        setisUploading(true);
         let form_data = new FormData();
 
         const colors = getSelectedOptions(templateColorsRef.current.childNodes);
@@ -102,11 +106,16 @@ function Upload({ user }) {
                     form_data2, 
                     {'Content-Type': 'multipart/form-data'}
                 ).then((res) => {
+                    setisUploading(null)
                     setisUploadSuccess(true)
-                }).catch((res) => {
+                }).catch((err) => {
+                    setisUploading(null)
                     setisUploadSuccess(false)
                 })
             }
+        }).catch((err) => {
+            setisUploading(null)
+            setisUploadSuccess(false)
         })
     }
 
@@ -304,42 +313,53 @@ function Upload({ user }) {
                 </div>
             </form>
 
-            { isUploadSuccess &&
+            { ( isUploadSuccess !== null || isUploading !== null) &&
                 <div className="absolute top-0 h-screen left-0 right-0 flex">
                     <div className="fixed top-0 h-screen left-0 right-0 z-20 bg-black opacity-50"></div>
-                    <div className="m-auto z-30 bg-white p-2 lg:p-4 text-center">
-                        <CheckCircleOutlineIcon className="text-green-400 mb-3" sx={{ width: 100, height: 100 }}/>
-                        <div className="space-y-5">
-                            <span className="font-bold lg:text-2xl">Template của bạn đã được tải lên thành công</span>
-                            <div className="flex justify-around">
-                                <Link to="/" className="btn !bg-primary text-white">Quay về trang chủ</Link>
-                                <button 
-                                    className="btn !bg-green-400 text-white"
-                                    onClick={ clearForm }
-                                >
-                                    Tiếp tục tải lên
-                                </button>
+                    <div className="sticky top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 m-auto z-30 bg-white p-2 lg:p-4 text-center">
+                        { isUploadSuccess && <>
+                            <CheckCircleOutlineIcon className="text-green-400 mb-3" sx={{ width: 100, height: 100 }}/>
+                            <div className="space-y-5">
+                                <span className="font-bold lg:text-2xl">Template của bạn đã được tải lên thành công</span>
+                                <div className="flex justify-around">
+                                    <Link to="/" className="btn !bg-primary text-white">Quay về trang chủ</Link>
+                                    <button 
+                                        className="btn !bg-green-400 text-white"
+                                        onClick={ clearForm }
+                                    >
+                                        Tiếp tục tải lên
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>                
-            }
-            { isUploadSuccess===false &&
-                <div className="absolute top-0 h-screen left-0 right-0 flex">
-                    <div className="fixed top-0 h-screen left-0 right-0 z-20 bg-black opacity-50"></div>
-                    <div className="m-auto z-30 bg-white p-2 lg:p-4 text-center">
-                        <CancelOutlinedIcon className="text-red-400 mb-3" sx={{ width: 100, height: 100 }}/>
-                        <div className="space-y-5">
-                            <span className="font-bold lg:text-2xl">Đã có lỗi xảy ra vui lòng kiểm tra lại thông tin<br/>hoặc báo với quản trị viên</span>
-                            <div className="flex justify-center">
-                                <button 
-                                    className="btn !bg-red-400 text-white !px-10"
-                                    onClick={ () => setisUploadSuccess(null) }
-                                >
-                                    Thử lại
-                                </button>
+                        </>}
+                        { isUploadSuccess===false && <>
+                            <CancelOutlinedIcon className="text-red-400 mb-3" sx={{ width: 100, height: 100 }}/>
+                            <div className="space-y-5">
+                                <span className="font-bold lg:text-2xl">Đã có lỗi xảy ra vui lòng kiểm tra lại thông tin<br/>hoặc báo với quản trị viên</span>
+                                <div className="flex justify-center">
+                                    <button 
+                                        className="btn !bg-red-400 text-white !px-10"
+                                        onClick={ () => setisUploadSuccess(null) }
+                                    >
+                                        Thử lại
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </>}
+                        { isUploading && <>
+                            <div className="flex items-center justify-center mb-2 w-96">
+                                <div className="center">
+                                    <div className="circle first bg-primary">
+                                        <div className="circle second">
+                                            <div className="circle third"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-5">
+                                <span className="font-bold lg:text-2xl">Template đang được tải lên <br/>bạn vui lòng chờ giây lát</span>
+                            </div>
+                        </>}
                     </div>
                 </div>                
             }

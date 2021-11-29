@@ -14,6 +14,7 @@ import callApi from '../../utils/apiCaller'
 
 function NavbarPC({ user, dispatch }) {
     const history = useHistory();
+    const userSession = JSON.parse(sessionStorage.getItem("session"))
 
     const logout = () => {
         callApi(
@@ -43,8 +44,8 @@ function NavbarPC({ user, dispatch }) {
                 </Link>
             }
 
-            { user ? 
-                /* Sign in */
+            { user || userSession ? 
+                /*  Sign in */
                 <div className="relative group h-11 flex items-center">
                     <div className="cursor-pointer flex items-center">
                         <Avatar src={ user?.userInfo?.profilePic } sx={{ width: 32, height: 32 }}/>

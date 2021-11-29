@@ -115,7 +115,7 @@ function Register({ dispatch }) {
 
             {isRegWithEmail ? 
                 /* Register form with Email */
-                (<form id="registerForm" className="m-auto w-full px-10 sm:px-16 space-y-2 max-h-[300px] overflow-y-scroll lg:max-h-full lg:overflow-y-hidden">
+                (<form id="registerForm" className="m-auto w-full px-10 sm:px-16 space-y-2 max-h-[300px] overflow-y-scroll">
                     <div 
                         className="absolute top-4 left-4 cursor-pointer"
                         onClick={ backToLoginOptions }
