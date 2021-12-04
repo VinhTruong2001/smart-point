@@ -30,13 +30,12 @@ function Paypal({ dispatch, uid, token, value }) {
                 // eslint-disable-next-line
                 const order = await actions.order.capture();
                 callApi('PATCH', `/api/userdata/update-premium/${uid}/1`).then(res => {
-                    setIsSuccess(true)
                     dispatch(setUser({
                         userInfo: res.data,
                         token
                     }))
+                    setIsSuccess(true)
                 })
-                console.log(order)
             },
             onError: (err) => {
                 setIsSuccess(false)

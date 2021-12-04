@@ -46,7 +46,7 @@ const routes = [
         main: ({match}) => <Profile match={match}/>
     },
     {
-        path: '/profile/:uid/upload',
+        path: '/profile/:uid/upload/:page',
         exact: true,
         main: ({match}) => <ProfileTemplatesUploaded match={match}/>
     },

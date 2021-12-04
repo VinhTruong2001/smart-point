@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TemplateFrames from './TemplateFrames'
 import callApi from '../../utils/apiCaller'
+import { Link } from 'react-router-dom'
 
 function TemplateSection({ title, path, search, order }) {
     const [templates, setTemplates] = useState(null)
@@ -32,9 +33,9 @@ function TemplateSection({ title, path, search, order }) {
             {/* Top */}
             <div className="flex justify-between">
                 <h2 className="font-bold text-2xl lg:text-3xl text-primary">{ title }</h2>
-                <a href={`${path}`} className="btn !bg-primary !border-transparent">
+                <Link to={`${path}`} className="btn !bg-primary !border-transparent">
                     <span className="text-white font-semibold">Xem thêm</span>
-                </a>
+                </Link>
             </div>
 
             {/* Body */}

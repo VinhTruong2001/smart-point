@@ -124,7 +124,7 @@ function TemplateContent({ user, dispatch, templateData }) {
                 <div className="space-y-3">
                     <h4 className="font-bold text-primary text-xl">Người đăng</h4>
                     <Link to={`/profile/${author?.uid}`} className="flex space-x-3 items-center group">
-                        <Avatar src={ author?.profilePic || author?.defaultGooglePhotoUrl }/>
+                        <Avatar src={ author?.profilePic ? "http://localhost:8000" + author?.profilePic : author?.defaultGooglePhotoUrl }/>
                         <div className="flex flex-col">
                             <span className="font-semibold group-hover:text-primary">{author?.displayName || 'Ẩn danh'}</span>
                             <span className="font-light text-gray-400">{author?.email || 'anonymous@ano.com'}</span>

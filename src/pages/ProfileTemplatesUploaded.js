@@ -13,7 +13,7 @@ function ProfileTemplatesUploaded({ match }) {
     const [prevPage, setPrevPage] = useState(null)
 
     useEffect(() => {
-        callApi('GET', `/api/templates/standard-pagination/${match.params.uid}/${match.params.page}`).then(res => {
+        callApi('GET', `/api/templates/standard-pagination/?search=${match.params.uid}&page=${match.params.page}`).then(res => {
             setTemplateUploaded(res.data);
             setNextPage(res.data.next);
             setPrevPage(res.data.previous);

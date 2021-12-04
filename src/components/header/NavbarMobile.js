@@ -50,7 +50,7 @@ function NavbarMobile({ user, dispatch }) {
                             onClick={ () => setUserMenuStatus(!userMenuStatus) }
                             className="flex items-center space-x-2  cursor-pointer border-b border-gray-400 pb-3"
                         >
-                            <Avatar src={ user?.userInfo?.profilePic || user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 32, height: 32 }}/>
+                            <Avatar src={ user?.userInfo?.profilePic ? "http://localhost:8000" + user?.userInfo?.profilePic : user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 32, height: 32 }}/>
                             <span >{ user?.userInfo?.displayName }</span>
                             <ArrowDropDownIcon />
                         </div>
