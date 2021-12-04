@@ -6,6 +6,8 @@ import Validator from '../../utils/validator'
 import callApi from '../../utils/apiCaller' 
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
+import { auth, provider } from '../../firebase'
+
 
 function Register({ dispatch }) {
     const history = useHistory();
@@ -50,6 +52,18 @@ function Register({ dispatch }) {
         })
     })
 
+    const RegWithGoogle = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                var user = result.user;
+                console.log(user)
+                register(user.email, user.email, user.uid, user.displayName, user.photoURL, user.phoneNumber)
+            }).catch((error) => {
+                var errorMessage = error.message;
+                console.log(errorMessage)
+            });
+    }
+
     const RegWithEmail = () => {
         setIsRegWithEmail(true);
     }
@@ -58,25 +72,27 @@ function Register({ dispatch }) {
         setIsRegWithEmail(false);
     }
 
-    const register = () => {
+    const register = (username=null, email=null, password=null, displayName=null, defaultGooglePhotoUrl=null, phone=null, gender=null, dateOfBirth=null) => {
         const userAccount = JSON.stringify({
-            username: usernameRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value
+            username: username || usernameRef.current.value,
+            email: email || emailRef.current.value,
+            password: password || passwordRef.current.value
         })
 
         const userInfo = JSON.stringify({
-            displayName: fullnameRef.current.value,
-            email: emailRef.current.value,
-            phone: phoneNumberRef.current.value,
+            displayName: displayName || fullnameRef.current.value,
+            email: email || emailRef.current.value,
+            defaultGooglePhotoUrl,
+            phone: phoneNumberRef.current?.value || phone,
             isPremium: false,
-            gender: genderMaleRef.current.checked ? genderMaleRef.current.value : genderFemaleRef.current.value,
-            dateOfBirth: dateOfBirthRef.current.value
+            gender: (genderMaleRef.current?.checked ? genderMaleRef.current?.value : genderFemaleRef.current?.value) || gender,
+            dateOfBirth: dateOfBirthRef.current?.value || dateOfBirth
         })
+        console.log(userInfo)
 
         const userAccountLogin = JSON.stringify({
-            username: usernameRef.current.value,
-            password: passwordRef.current.value
+            username: username || usernameRef.current.value,
+            password: password || passwordRef.current.value
         })
 
         callApi(
@@ -104,9 +120,9 @@ function Register({ dispatch }) {
 
                     dispatch(setUser(userSession));
                     history.push(location.state?.prevPath || '/');
-                })
-            })
-        }).catch(err => console.error(err));
+                }).catch(err => console.error(err.data))
+            }).catch(err => console.error(err.data))
+        }).catch(err => console.error(err.data));
     }
 
     return (
@@ -263,7 +279,10 @@ function Register({ dispatch }) {
                         <PersonOutlineIcon className="text-gray-600"/>
                         <span className="font-semibold text-gray-600">Đăng ký bằng Email</span>
                     </div>
-                    <div className="flex items-center space-x-4 px-4 h-12 border-2 border-gray-300 rounded-full cursor-pointer hover:bg-gray-300">
+                    <div 
+                        className="flex items-center space-x-4 px-4 h-12 border-2 border-gray-300 rounded-full cursor-pointer hover:bg-gray-300"
+                        onClick={ RegWithGoogle }
+                    >
                         <img alt="google logo" src={process.env.PUBLIC_URL + '/img/Google.icon.svg'}/>
                         <span className="font-semibold text-gray-600">Đăng ký qua Google</span>
                     </div>

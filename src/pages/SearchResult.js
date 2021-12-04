@@ -16,7 +16,7 @@ function SearchResult({ match }) {
     let templatesListTemp
 
     useEffect(() => {
-        callApi('GET', `/api/templates/standard-pagination/?search=${match.params.value}&?page=${match.params.page}`).then(res => {
+        callApi('GET', `/api/templates/standard-pagination/?search=${match.params.value}&page=${match.params.page}`).then(res => {
             let templatesListTemp = res.data.results?.map((template, index) =>
                 <div key={index}>
                     <TemplateFrames 

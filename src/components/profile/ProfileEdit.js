@@ -127,7 +127,7 @@ function ProfileEdit({ user, dispatch }) {
             {/* Edit profile */}
            <div className="flex flex-col space-y-3 justify-center items-center pb-20">
                 <div className="relative">
-                    <Avatar src={ preAvatar || user?.userInfo.profilePic } sx={{ width: 100, height: 100 }}/>
+                    <Avatar src={ preAvatar || user?.userInfo?.profilePic || user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 100, height: 100 }}/>
                     <label htmlFor="avatarUpload" className="absolute right-0 bottom-0 flex items-center text-white p-1 rounded-full bg-primary cursor-pointer">
                         <EditIcon fontSize="small"/>
                     </label>

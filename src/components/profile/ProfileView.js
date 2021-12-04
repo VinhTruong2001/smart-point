@@ -35,7 +35,7 @@ function ProfileView({ uid }) {
 
     return <>
         <div className="flex flex-col space-y-3 justify-center items-center pb-20">
-            <Avatar src={ otherUser?.profilePic } sx={{ width: 100, height: 100 }}/>
+            <Avatar src={otherUser?.profilePic || otherUser?.defaultGooglePhotoUrl } sx={{ width: 100, height: 100 }}/>
             <div className="flex items-center">
                 <h2 className="min-w-400 text-center text-primary text-2xl lg:text-3xl font-bold outline-none pb-2 border-b border-primary" >
                     { otherUser?.displayName }

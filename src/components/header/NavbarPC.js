@@ -48,13 +48,13 @@ function NavbarPC({ user, dispatch }) {
                 /*  Sign in */
                 <div className="relative group h-11 flex items-center">
                     <div className="cursor-pointer flex items-center">
-                        <Avatar src={ user?.userInfo?.profilePic } sx={{ width: 32, height: 32 }}/>
+                        <Avatar src={ user?.userInfo?.profilePic || user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 32, height: 32 }}/>
                         <ArrowDropDownIcon />
                     </div>
                    
                     <div className="absolute z-[3] top-[101%] right-3 text-black bg-white w-[280px] p-2 rounded-md shadow-lg transform scale-0 group-hover:scale-100 origin-top-right duration-200 ">
                         <div className="flex space-x-4 items-center border-b-2 border-gray-300 pb-2 mb-2">
-                            <Avatar src={ user?.userInfo?.profilePic } sx={{ width: 40, height: 40 }}/>
+                            <Avatar src={ user?.userInfo?.profilePic || user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 40, height: 40 }}/>
                             <div>
                                 <div className="font-medium">{ user?.userInfo?.displayName }</div>
                                 <div className="text-sm text-gray-500">{ user?.userInfo?.email }</div>

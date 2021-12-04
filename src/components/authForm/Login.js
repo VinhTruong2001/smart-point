@@ -6,6 +6,7 @@ import Validator from '../../utils/validator'
 import callApi from '../../utils/apiCaller'
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
+import { auth, provider } from '../../firebase'
 
 function Login({ dispatch }) {
     const history = useHistory();
@@ -31,6 +32,18 @@ function Login({ dispatch }) {
         })
     })
 
+    const loginWithGoogle = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                var user = result.user;
+                console.log(user)
+                login(user.email, user.uid)
+            }).catch((error) => {
+                var errorMessage = error.message;
+                console.log(errorMessage)
+            });
+    }
+
     const loginWithEmail = () => {
         setIsLoginWithEmail(true);
     }
@@ -39,10 +52,10 @@ function Login({ dispatch }) {
         setIsLoginWithEmail(false);
     }
 
-    const login = () => {
+    const login = (username=null, password=null) => {
         const userAccountLogin = JSON.stringify({
-            username: usernameRef.current.value,
-            password: passwordRef.current.value
+            username: usernameRef.current?.value || username,
+            password: passwordRef.current?.value || password
         })
 
         callApi(
@@ -129,7 +142,10 @@ function Login({ dispatch }) {
                         <PersonOutlineIcon className="text-gray-600"/>
                         <span className="font-semibold text-gray-600">Đăng nhập bằng Email</span>
                     </div>
-                    <div className="flex items-center space-x-4 px-4 h-12 border-2 border-gray-300 rounded-full cursor-pointer hover:bg-gray-300">
+                    <div 
+                        className="flex items-center space-x-4 px-4 h-12 border-2 border-gray-300 rounded-full cursor-pointer hover:bg-gray-300"
+                        onClick={ loginWithGoogle }
+                    >
                         <img alt="google logo" src={process.env.PUBLIC_URL + '/img/Google.icon.svg'}/>
                         <span className="font-semibold text-gray-600">Đăng nhập qua Google</span>
                     </div>

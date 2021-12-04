@@ -14,8 +14,9 @@ function PopularTemplates({ match }) {
     let templatesListTemp
 
     useEffect(() => {
-        callApi('GET', `/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}`).then(res => {
+        callApi('GET', `/api/templates/standard-pagination/?ordering=create_at&page=${match.params.page}`).then(res => {
             let templatesListTemp = res.data.results?.map((template, index) =>
+                template.topics.indexOf('infoGraphic') === -1 &&
                 <div key={index}>
                     <TemplateFrames 
                         isPremium={template.isPremium} 

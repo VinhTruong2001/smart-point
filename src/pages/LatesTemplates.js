@@ -13,20 +13,21 @@ function LatesTemplates({ match }) {
 
     let templatesListTemp
     useEffect(() => {
-        callApi('GET', `/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}`).then(res => {
-            let templatesListTemp = res.data.results?.map((template, index) =>
-                <div key={index}>
-                    <TemplateFrames 
-                        isPremium={template.isPremium} 
-                        templateFile={template.templates_file} 
-                        id={template.id} 
-                        url={template.slide_image}
-                    />
-                    <Link to={`/templates/${template.id}`}>
-                        <h4 className="hover:text-primary mt-2">{template.name}</h4>
-                    </Link>
-                    <p className="text-justify text-gray-400 font-light line-clamp-3">{template.description}</p>
-                </div>
+        callApi('GET', `/api/templates/standard-pagination/?ordering=-create_at&page=${match.params.page}`).then(res => {
+            // eslint-disable-next-line
+            let templatesListTemp = res.data.results?.map((template, index) => 
+                    <div key={index}>
+                        <TemplateFrames 
+                            isPremium={template.isPremium} 
+                            templateFile={template.templates_file} 
+                            id={template.id} 
+                            url={template.slide_image}
+                        />
+                        <Link to={`/templates/${template.id}`}>
+                            <h4 className="hover:text-primary mt-2">{template.name}</h4>
+                        </Link>
+                        <p className="text-justify text-gray-400 font-light line-clamp-3">{template.description}</p>
+                    </div>
             )
             setTemplateList(templatesListTemp);
             setNextPage(res.data.next);
@@ -45,7 +46,7 @@ function LatesTemplates({ match }) {
                 {templateList}
             </div>
             <div className="mt-6 space-x-4 flex justify-center">
-                { prevPage && prevPage !== `https://smartpoints.herokuapp.com/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}` &&
+                { prevPage &&
                     <Link 
                         to={`/latest/${parseInt(match.params.page)-1}`}
                         className="btn !bg-primary text-white !py-4"
@@ -54,7 +55,7 @@ function LatesTemplates({ match }) {
                         Trang trước
                     </Link>
                 }
-                { nextPage && nextPage !== `https://smartpoints.herokuapp.com/api/templates/standard-pagination/?ordering=create_at&?page=${match.params.page}` &&
+                { nextPage &&
                     <Link 
                         to={`/latest/${parseInt(match.params.page)+1}`}
                         className="btn !bg-primary text-white !py-4"
