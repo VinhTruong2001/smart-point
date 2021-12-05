@@ -64,9 +64,9 @@ function ProfileView({ uid }) {
                     {listTemplatesUploaded}
                 </div>
             }
-            { templateUploaded?.next && 
+            { !templateUploaded?.next && 
                 <div className="m-auto">
-                    <Link to="./upload/1" className="btn !bg-primary text-white">
+                    <Link to={`/profile/${uid}/upload/1`} className="btn !bg-primary text-white">
                         Xem thêm
                     </Link>
                 </div>
