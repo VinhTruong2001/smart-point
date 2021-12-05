@@ -8,9 +8,16 @@ import TemplateFrames from '../templatesShow/TemplateFrames'
 function ProfileView({ uid }) {
     const [otherUser, setOtherUser] = useState(null)
     const [templateUploaded, setTemplateUploaded] = useState(null)
+    const [userAvatar, setUserAvatar] = useState(null)
 
     useEffect(() => {
         callApi('GET', `/api/userdata/${uid}`).then(res => {
+            const apiSrc = "http://localhost:8000"
+            if (res.data.profilePic) {
+                setUserAvatar(res.data.profilePic?.includes(apiSrc) ? res.data.profilePic : (apiSrc + res.data.profilePic))
+            } else {
+                setUserAvatar(res.data.defaultGooglePhotoUrl)
+            }
             setOtherUser(res.data);
         })
         callApi('GET', `/api/templates/small-pagination/?search=${uid}`).then(res =>
@@ -35,7 +42,7 @@ function ProfileView({ uid }) {
 
     return <>
         <div className="flex flex-col space-y-3 justify-center items-center pb-20">
-            <Avatar src={ otherUser?.profilePic ? "http://localhost:8000" + otherUser?.profilePic : otherUser?.defaultGooglePhotoUrl } sx={{ width: 100, height: 100 }}/>
+            <Avatar src={ userAvatar } sx={{ width: 100, height: 100 }}/>
             <div className="flex items-center">
                 <h2 className="min-w-400 text-center text-primary text-2xl lg:text-3xl font-bold outline-none pb-2 border-b border-primary" >
                     { otherUser?.displayName }
@@ -59,7 +66,7 @@ function ProfileView({ uid }) {
             }
             { templateUploaded?.next && 
                 <div className="m-auto">
-                    <Link to="./uploaded" className="btn !bg-primary text-white">
+                    <Link to="./upload/1" className="btn !bg-primary text-white">
                         Xem thêm
                     </Link>
                 </div>

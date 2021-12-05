@@ -21,12 +21,21 @@ function TemplateContent({ user, dispatch, templateData }) {
         downloaded: 0,
     });
 
+    const [userAvatar, setUserAvatar] = useState(null)
+
+
     useEffect(() => {
         callApi('GET', `/api/templates/?search=${templateData.topics[0]}`).then(res => {
             setRelativeTemplates(res.data)
         })
 
         callApi('GET', `/api/userdata/${templateData.authorUID}`).then(res => {
+            const apiSrc = "http://localhost:8000"
+            if (res.data.profilePic) {
+                setUserAvatar(res.data.profilePic?.includes(apiSrc) ? res.data.profilePic : (apiSrc + res.data.profilePic))
+            } else {
+                setUserAvatar(res.data.defaultGooglePhotoUrl)
+            }
             setAuthor(res.data)
         })
 
@@ -124,7 +133,7 @@ function TemplateContent({ user, dispatch, templateData }) {
                 <div className="space-y-3">
                     <h4 className="font-bold text-primary text-xl">Người đăng</h4>
                     <Link to={`/profile/${author?.uid}`} className="flex space-x-3 items-center group">
-                        <Avatar src={ author?.profilePic ? "http://localhost:8000" + author?.profilePic : author?.defaultGooglePhotoUrl }/>
+                        <Avatar src={ userAvatar }/>
                         <div className="flex flex-col">
                             <span className="font-semibold group-hover:text-primary">{author?.displayName || 'Ẩn danh'}</span>
                             <span className="font-light text-gray-400">{author?.email || 'anonymous@ano.com'}</span>

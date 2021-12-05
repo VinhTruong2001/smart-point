@@ -23,6 +23,9 @@ function ProfileEdit({ user, dispatch }) {
 
     const [isChangePassword, setIsChangePassword] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    
+    const [userAvatar, setUserAvatar] = useState(null)
+
 
     useEffect(() => {
         Validator({
@@ -41,7 +44,15 @@ function ProfileEdit({ user, dispatch }) {
                 changePassword();
             }
         })
-    })
+
+        const apiSrc = "http://localhost:8000"
+        if (user?.userInfo?.profilePic) {
+            setUserAvatar(user?.userInfo?.profilePic.includes(apiSrc) ? user?.userInfo?.profilePic : (apiSrc + user?.userInfo?.profilePic))
+        } else {
+            setUserAvatar(user?.userInfo?.defaultGooglePhotoUrl)
+        }
+        // eslint-disable-next-line
+    }, [user])
 
     const uploadAvatarFile = (e) => {
         const reader = new FileReader();
@@ -127,7 +138,7 @@ function ProfileEdit({ user, dispatch }) {
             {/* Edit profile */}
            <div className="flex flex-col space-y-3 justify-center items-center pb-20">
                 <div className="relative">
-                    <Avatar src={ preAvatar || (user?.userInfo?.profilePic ? "http://localhost:8000" + user?.userInfo?.profilePic : user?.userInfo?.defaultGooglePhotoUrl) } sx={{ width: 100, height: 100 }}/>
+                    <Avatar src={ preAvatar || userAvatar } sx={{ width: 100, height: 100 }}/>
                     <label htmlFor="avatarUpload" className="absolute right-0 bottom-0 flex items-center text-white p-1 rounded-full bg-primary cursor-pointer">
                         <EditIcon fontSize="small"/>
                     </label>

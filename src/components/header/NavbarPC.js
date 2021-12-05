@@ -10,11 +10,13 @@ import { Avatar } from '@mui/material';
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/index';
 import callApi from '../../utils/apiCaller'
+import { useEffect, useState } from 'react';
 
 
 function NavbarPC({ user, dispatch }) {
     const history = useHistory();
     const userSession = JSON.parse(sessionStorage.getItem("session"))
+    const [userAvatar, setUserAvatar] = useState(null)
 
     const logout = () => {
         callApi(
@@ -27,6 +29,15 @@ function NavbarPC({ user, dispatch }) {
             history.push('/login');
         })
     }
+
+    useEffect(() => {
+        const apiSrc = "http://localhost:8000"
+        if (user?.userInfo?.profilePic) {
+            setUserAvatar(user?.userInfo?.profilePic.includes(apiSrc) ? user?.userInfo?.profilePic : (apiSrc + user?.userInfo?.profilePic))
+        } else {
+            setUserAvatar(user?.userInfo?.defaultGooglePhotoUrl)
+        }
+    }, [user])
 
     return (
         <div className="hidden h-14 space-x-3 lg:flex items-center text-white">
@@ -48,13 +59,13 @@ function NavbarPC({ user, dispatch }) {
                 /*  Sign in */
                 <div className="relative group h-11 flex items-center">
                     <div className="cursor-pointer flex items-center">
-                        <Avatar src={ user?.userInfo?.profilePic ? "http://localhost:8000" + user?.userInfo?.profilePic : user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 32, height: 32 }}/>
+                        <Avatar src={ userAvatar } sx={{ width: 32, height: 32 }}/>
                         <ArrowDropDownIcon />
                     </div>
                    
                     <div className="absolute z-[3] top-[101%] right-3 text-black bg-white w-[280px] p-2 rounded-md shadow-lg transform scale-0 group-hover:scale-100 origin-top-right duration-200 ">
                         <div className="flex space-x-4 items-center border-b-2 border-gray-300 pb-2 mb-2">
-                            <Avatar src={ user?.userInfo?.profilePic ? "http://localhost:8000" + user?.userInfo?.profilePic : user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 40, height: 40 }}/>
+                            <Avatar src={userAvatar } sx={{ width: 40, height: 40 }}/>
                             <div>
                                 <div className="font-medium">{ user?.userInfo?.displayName }</div>
                                 <div className="text-sm text-gray-500">{ user?.userInfo?.email }</div>

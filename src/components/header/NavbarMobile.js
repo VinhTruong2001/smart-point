@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/navbarMobile.css'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -19,6 +19,7 @@ import FilterMobile from '../searchAndFilter/filter/FilterMobile';
 function NavbarMobile({ user, dispatch }) {
     const history = useHistory()
     const [userMenuStatus, setUserMenuStatus] = useState(false)
+    const [userAvatar, setUserAvatar] = useState(null)
     
     const logout = () => {
         callApi(
@@ -31,6 +32,15 @@ function NavbarMobile({ user, dispatch }) {
             history.push('/login');
         })
     }
+    
+    useEffect(() => {
+        const apiSrc = "http://localhost:8000"
+        if (user?.userInfo?.profilePic) {
+            setUserAvatar(user?.userInfo?.profilePic.includes(apiSrc) ? user?.userInfo?.profilePic : (apiSrc + user?.userInfo?.profilePic))
+        } else {
+            setUserAvatar(user?.userInfo?.defaultGooglePhotoUrl)
+        }
+    }, [user])
 
     return (
         <div className="block lg:hidden relative">
@@ -50,7 +60,7 @@ function NavbarMobile({ user, dispatch }) {
                             onClick={ () => setUserMenuStatus(!userMenuStatus) }
                             className="flex items-center space-x-2  cursor-pointer border-b border-gray-400 pb-3"
                         >
-                            <Avatar src={ user?.userInfo?.profilePic ? "http://localhost:8000" + user?.userInfo?.profilePic : user?.userInfo?.defaultGooglePhotoUrl } sx={{ width: 32, height: 32 }}/>
+                            <Avatar src={ userAvatar } sx={{ width: 32, height: 32 }}/>
                             <span >{ user?.userInfo?.displayName }</span>
                             <ArrowDropDownIcon />
                         </div>

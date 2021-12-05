@@ -9,6 +9,7 @@ import NotFound from '../components/notFound/NotFound';
 
 function ProfileTemplatesUploaded({ match }) {
     const [templateUploaded, setTemplateUploaded] = useState(null)
+    const [userDisplayname, setUserDisplayname] = useState(null)
     const [nextPage, setNextPage] = useState(null)
     const [prevPage, setPrevPage] = useState(null)
 
@@ -17,6 +18,9 @@ function ProfileTemplatesUploaded({ match }) {
             setTemplateUploaded(res.data);
             setNextPage(res.data.next);
             setPrevPage(res.data.previous);
+        })
+        callApi('GET', `/api/userdata/${match.params.uid}`).then(res => {
+            setUserDisplayname(res.data.displayName);
         })
     }, [match])
 
@@ -38,6 +42,7 @@ function ProfileTemplatesUploaded({ match }) {
     return <>
         <FilterBar />
         <div className="body-container font-bold mb-6">
+            <h1 className="text-2xl text-primary">Các template đã đăng tải của <u>{ userDisplayname || "Ẩn danh" }</u></h1>
             {(listTemplatesUploaded===undefined || listTemplatesUploaded?.length===0) ? 
                 <NotFound message="Người dùng này chưa đăng lên bất kỳ Template nào"/>
                 :
