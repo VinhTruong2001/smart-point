@@ -53,7 +53,7 @@ function ProfileTemplatesUploaded({ match }) {
                     <div className="mt-6 space-x-4 flex justify-center">
                         { prevPage &&
                             <Link 
-                                to={`/profile/${match.params.uid}/${parseInt(match.params.page)-1}`}
+                                to={`/profile/${match.params.uid}/upload/${parseInt(match.params.page)-1}`}
                                 className="btn !bg-primary text-white !py-4"
                             >
                                 <ArrowBackIcon />
@@ -62,7 +62,7 @@ function ProfileTemplatesUploaded({ match }) {
                         }
                         { nextPage &&
                             <Link 
-                                to={`/profile/${match.params.uid}/${parseInt(match.params.page)+1}`}
+                                to={`/profile/${match.params.uid}/upload/${parseInt(match.params.page)+1}`}
                                 className="btn !bg-primary text-white !py-4"
                             >
                                 Trang tiếp
